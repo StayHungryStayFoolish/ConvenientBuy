@@ -253,19 +253,22 @@ CREATE TABLE db_convenientbuy.cb_order_shipping (
 )
   COMMENT '商品物流信息表';
 
-DROP TABLE IF EXISTS db_convenientbuy.tb_user;
+DROP TABLE IF EXISTS db_convenientbuy.cb_user;
 CREATE TABLE db_convenientbuy.cb_user (
-  id       BIGINT(20)  NOT NULL AUTO_INCREMENT,
+  id       BIGINT(20)  AUTO_INCREMENT PRIMARY KEY
+  COMMENT 'PK ID',
   username VARCHAR(50) NOT NULL
   COMMENT '用户名',
   password VARCHAR(32) NOT NULL
   COMMENT '密码，加密存储',
-  phone    VARCHAR(20)          DEFAULT NULL
+  phone    VARCHAR(20) DEFAULT NULL
   COMMENT '注册手机号',
-  email    VARCHAR(50)          DEFAULT NULL
+  email    VARCHAR(50) DEFAULT NULL
   COMMENT '注册邮箱',
-  created  DATETIME    NOT NULL,
-  updated  DATETIME    NOT NULL,
+  created  DATETIME    DEFAULT NULL
+  COMMENT '创建时间',
+  updated  DATETIME    DEFAULT NULL
+  COMMENT '更新时间',
   UNIQUE KEY username (username) USING BTREE,
   UNIQUE KEY phone (phone) USING BTREE,
   UNIQUE KEY email (email) USING BTREE
