@@ -109,12 +109,12 @@ CREATE TABLE db_convenientbuy.cb_item_cat (
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_decs;
 CREATE TABLE db_convenientbuy.cb_item_desc (
-  item_id   BIGINT(20) AUTO_INCREMENT PRIMARY KEY
+  item_id   BIGINT(20) PRIMARY KEY
   COMMENT ' PK 商品 ID',
   item_desc TEXT COMMENT '商品描述',
-  created   DATETIME   DEFAULT NULL
+  created   DATETIME DEFAULT NULL
   COMMENT '创建时间',
-  updated   DATETIME   DEFAULT NULL
+  updated   DATETIME DEFAULT NULL
   COMMENT '更新时间'
 )
   COMMENT '商品描述表';
@@ -132,14 +132,14 @@ CREATE TABLE db_convenientbuy.cb_item_parm (
   COMMENT '更新时间',
   KEY item_cat_id(item_cat_id)
 )
-  COMMENT '商品规格参数';
+  COMMENT '商品规格参数表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm_item;
 CREATE TABLE db_convenientbuy.cb_item_parm_item (
   id         BIGINT(20) AUTO_INCREMENT PRIMARY KEY
-  COMMENT '',
+  COMMENT 'PK ID',
   item_id    BIGINT(20) DEFAULT NULL
-  COMMENT '',
+  COMMENT '商品 ID',
   param_data TEXT COMMENT '参数数据，格式为json格式',
   created    DATETIME   DEFAULT NULL
   COMMENT '创建时间',
@@ -152,45 +152,45 @@ CREATE TABLE db_convenientbuy.cb_item_parm_item (
 DROP TABLE IF EXISTS db_convenientbuy.cb_orde;
 CREATE TABLE db_convenientbuy.cb_orde (
   order_id      VARCHAR(50)
-                COLLATE utf8_bin PRIMARY KEY DEFAULT NULL
-  COMMENT '',
+                COLLATE utf8_bin PRIMARY KEY
+  COMMENT 'PK ID',
   payment       VARCHAR(50)
-                COLLATE utf8_bin             DEFAULT NULL
-  COMMENT '',
-  payment_type  INT(2)                       DEFAULT NULL
-  COMMENT '',
+                COLLATE utf8_bin DEFAULT NULL
+  COMMENT '实付金额，精确到2位小数，即分',
+  payment_type  INT(2)           DEFAULT NULL
+  COMMENT '支付类型 1在线支付/2货到付款',
   post_fee      VARCHAR(50)
-                COLLATE utf8_bin             DEFAULT NULL
-  COMMENT '',
-  status        INT(10)                      DEFAULT NULL
-  COMMENT '状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭',
-  create_time   DATETIME                     DEFAULT NULL
+                COLLATE utf8_bin DEFAULT NULL
+  COMMENT '邮费，精确到2位小数，即分',
+  status        INT(10)          DEFAULT NULL
+  COMMENT '状态：1、未付款/2、已付款/3、未发货/4、已发货/5、交易成功/6、交易关闭',
+  create_time   DATETIME         DEFAULT NULL
   COMMENT '订单创建时间',
-  update_time   DATETIME                     DEFAULT NULL
+  update_time   DATETIME         DEFAULT NULL
   COMMENT '订单更新时间',
-  payment_time  DATETIME                     DEFAULT NULL
+  payment_time  DATETIME         DEFAULT NULL
   COMMENT '付款时间',
-  consign_time  DATETIME                     DEFAULT NULL
+  consign_time  DATETIME         DEFAULT NULL
   COMMENT '发货时间',
-  end_time      DATETIME                     DEFAULT NULL
+  end_time      DATETIME         DEFAULT NULL
   COMMENT '交易完成时间',
-  close_time    DATETIME                     DEFAULT NULL
+  close_time    DATETIME         DEFAULT NULL
   COMMENT '交易关闭时间',
   shipping_name VARCHAR(20)
-                COLLATE utf8_bin             DEFAULT NULL
+                COLLATE utf8_bin DEFAULT NULL
   COMMENT '物流名称',
   shipping_code VARCHAR(20)
-                COLLATE utf8_bin             DEFAULT NULL
+                COLLATE utf8_bin DEFAULT NULL
   COMMENT '物流单号',
-  user_id       BIGINT(20)                   DEFAULT NULL
+  user_id       BIGINT(20)       DEFAULT NULL
   COMMENT '用户id',
   buyer_message VARCHAR(100)
-                COLLATE utf8_bin             DEFAULT NULL
+                COLLATE utf8_bin DEFAULT NULL
   COMMENT '买家留言',
   buyer_nick    VARCHAR(50)
-                COLLATE utf8_bin             DEFAULT NULL
+                COLLATE utf8_bin DEFAULT NULL
   COMMENT '买家昵称',
-  buyer_rate    INT(2)                       DEFAULT NULL
+  buyer_rate    INT(2)           DEFAULT NULL
   COMMENT '买家是否已经评价',
   KEY create_time (create_time),
   KEY buyer_nick (buyer_nick),
@@ -202,7 +202,8 @@ CREATE TABLE db_convenientbuy.cb_orde (
 DROP TABLE IF EXISTS db_convenientbuy.cb_order_item;
 CREATE TABLE cb_convenientbuy.cb_order_item (
   id        VARCHAR(20) PRIMARY KEY
-  COLLATE utf8_bin           NOT NULL,
+  COLLATE utf8_bin
+  COMMENT 'PK ID',
   item_id   VARCHAR(50)
             COLLATE utf8_bin NOT NULL
   COMMENT '商品id',
@@ -228,8 +229,8 @@ CREATE TABLE cb_convenientbuy.cb_order_item (
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_order_shipping;
 CREATE TABLE db_convenientbuy.cb_order_shipping (
-  order_id          VARCHAR(50) NOT NULL
-  COMMENT '订单ID',
+  order_id          VARCHAR(50) PRIMARY KEY
+  COMMENT 'PK 订单ID',
   receiver_name     VARCHAR(20)  DEFAULT NULL
   COMMENT '收货人全名',
   receiver_phone    VARCHAR(20)  DEFAULT NULL
@@ -273,8 +274,4 @@ CREATE TABLE db_convenientbuy.cb_user (
   UNIQUE KEY phone (phone) USING BTREE,
   UNIQUE KEY email (email) USING BTREE
 )
-  COMMENT '';
-
-
-SELECT *
-FROM db_convenientbuy.cb_content);
+  COMMENT '用户表';
