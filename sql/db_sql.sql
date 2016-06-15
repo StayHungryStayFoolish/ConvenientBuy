@@ -33,7 +33,10 @@ CREATE TABLE db_convenientbuy.cb_content_category (
   KEY sort_order(sort_order)
 ) COMMENT 'CMS - 类目分类表';
 
+DROP TABLE IF EXISTS db_convenientbuy.cb_item;
+
+
 
 
 SELECT *
-FROM db_convenientbuy.cb_content);
+FROM db_convenientbuy.cb_content;
