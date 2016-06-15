@@ -224,9 +224,36 @@ CREATE TABLE cb_convenientbuy.cb_order_item (
   KEY item_id (item_id),
   KEY order_id (order_id)
 )
-  COMMENT '订单详情' ;
+  COMMENT '订单详情';
+
+DROP TABLE IF EXISTS db_convenientbuy.cb_order_shipping;
+CREATE TABLE db_convenientbuy.cb_order_shipping (
+  order_id          VARCHAR(50) NOT NULL
+  COMMENT '订单ID',
+  receiver_name     VARCHAR(20)  DEFAULT NULL
+  COMMENT '收货人全名',
+  receiver_phone    VARCHAR(20)  DEFAULT NULL
+  COMMENT '固定电话',
+  receiver_mobile   VARCHAR(30)  DEFAULT NULL
+  COMMENT '移动电话',
+  receiver_state    VARCHAR(10)  DEFAULT NULL
+  COMMENT '省份',
+  receiver_city     VARCHAR(10)  DEFAULT NULL
+  COMMENT '城市',
+  receiver_district VARCHAR(20)  DEFAULT NULL
+  COMMENT '区/县',
+  receiver_address  VARCHAR(200) DEFAULT NULL
+  COMMENT '收货地址',
+  receiver_zip      VARCHAR(6)   DEFAULT NULL
+  COMMENT '邮政编码',
+  created     DATETIME   DEFAULT NULL
+  COMMENT '创建时间',
+  updated     DATETIME   DEFAULT NULL
+  COMMENT '更新时间'
+)
+  COMMENT '商品物流信息表';
 
 
 
-  SELECT *
-  FROM db_convenientbuy.cb_content);
+SELECT *
+FROM db_convenientbuy.cb_content);
