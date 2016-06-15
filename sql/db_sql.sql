@@ -199,5 +199,34 @@ CREATE TABLE db_convenientbuy.cb_orde (
 )
   COMMENT '订单表';
 
-SELECT *
-FROM db_convenientbuy.cb_content;
+DROP TABLE IF EXISTS db_convenientbuy.cb_order_item;
+CREATE TABLE cb_convenientbuy.cb_order_item (
+  id        VARCHAR(20) PRIMARY KEY
+  COLLATE utf8_bin           NOT NULL,
+  item_id   VARCHAR(50)
+            COLLATE utf8_bin NOT NULL
+  COMMENT '商品id',
+  order_id  VARCHAR(50)
+            COLLATE utf8_bin NOT NULL
+  COMMENT '订单id',
+  num       INT(10)          DEFAULT NULL
+  COMMENT '商品购买数量',
+  title     VARCHAR(200)
+            COLLATE utf8_bin DEFAULT NULL
+  COMMENT '商品标题',
+  price     BIGINT(50)       DEFAULT NULL
+  COMMENT '商品单价',
+  total_fee BIGINT(50)       DEFAULT NULL
+  COMMENT '商品总金额',
+  pic_path  VARCHAR(200)
+            COLLATE utf8_bin DEFAULT NULL
+  COMMENT '商品图片地址',
+  KEY item_id (item_id),
+  KEY order_id (order_id)
+)
+  COMMENT '订单详情' ;
+
+
+
+  SELECT *
+  FROM db_convenientbuy.cb_content);
