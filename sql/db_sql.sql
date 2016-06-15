@@ -87,17 +87,17 @@ CREATE TABLE db_convenientbuy.cb_item (
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_cat;
 CREATE TABLE db_convenientbuy.cb_item_cat (
   id         BIGINT(20)  AUTO_INCREMENT PRIMARY KEY
-  COMMENT '',
+  COMMENT 'PK ID',
   prient_id  BIGINT(20)  DEFAULT NULL
-  COMMENT '',
+  COMMENT '父类 id=0,代表一级类别',
   name       VARCHAR(50) DEFAULT NULL
-  COMMENT '',
+  COMMENT '类别名称',
   status     INT(1)      DEFAULT '1'
-  COMMENT '',
+  COMMENT '状态 1正常/2删除',
   sort_order INT(4)      DEFAULT '1'
-  COMMENT '',
+  COMMENT '排列顺序',
   is_parent  TINYINT(1)  DEFAULT '1'
-  COMMENT '',
+  COMMENT '是否为父类级别 1true/2false',
   created    DATETIME    DEFAULT NULL
   COMMENT '创建时间',
   updated    DATETIME    DEFAULT NULL
@@ -105,7 +105,10 @@ CREATE TABLE db_convenientbuy.cb_item_cat (
   KEY parent_id(prient_id) USING BTREE,
   KEY sort_order(sort_order)
 )
-  COMMENT '';
+  COMMENT '商品类别';
+
+
+
 
 
 SELECT *
