@@ -52,11 +52,11 @@ CREATE TABLE db_convenientbuy.cb_content_category (
   KEY parent_id (parent_id, status) USING BTREE,
   KEY sort_order(sort_order)
 )
-  COMMENT 'CMS - 类目分类表';
+  COMMENT 'CMS - 商品内容分类表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item;
 CREATE TABLE db_convenientbuy.cb_item (
-  id         BIGINT(20)            AUTO_INCREMENT PRIMARY KEY
+  id         BIGINT(20) PRIMARY KEY
   COMMENT 'PK ID',
   title      VARCHAR(100) NOT NULL
   COMMENT '商品标题',
@@ -82,11 +82,11 @@ CREATE TABLE db_convenientbuy.cb_item (
   KEY status(status),
   KEY updated(updated)
 )
-  COMMENT '';
+  COMMENT '商品表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_cat;
 CREATE TABLE db_convenientbuy.cb_item_cat (
-  id         BIGINT(20)  AUTO_INCREMENT PRIMARY KEY
+  id         BIGINT(20) PRIMARY KEY
   COMMENT 'PK ID',
   prient_id  BIGINT(20)  DEFAULT NULL
   COMMENT '父类 id=0,代表一级类别',
@@ -105,7 +105,7 @@ CREATE TABLE db_convenientbuy.cb_item_cat (
   KEY parent_id(prient_id) USING BTREE,
   KEY sort_order(sort_order)
 )
-  COMMENT '商品类别';
+  COMMENT '商品类别表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_decs;
 CREATE TABLE db_convenientbuy.cb_item_desc (
