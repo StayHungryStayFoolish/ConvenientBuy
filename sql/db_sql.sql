@@ -120,14 +120,31 @@ CREATE TABLE db_convenientbuy.cb_item_desc (
   COMMENT '商品描述表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm;
-CREATE TABLE db_convenientbuy.cb_item_parm(
-  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY COMMENT '',
-  item_cat_id BIGINT(20) DEFAULT NULL COMMENT '',
-  parm_data TEXT COMMENT '',
+CREATE TABLE db_convenientbuy.cb_item_parm (
+  id          BIGINT(20) AUTO_INCREMENT PRIMARY KEY
+  COMMENT 'PK ID',
+  item_cat_id BIGINT(20) DEFAULT NULL
+  COMMENT '商品类别 ID',
+  parm_data   TEXT COMMENT '商品参数,json 格式',
+  created     DATETIME   DEFAULT NULL
+  COMMENT '创建时间',
+  updated     DATETIME   DEFAULT NULL
+  COMMENT '更新时间',
+  KEY item_cat_id(item_cat_id)
+)
+  COMMENT '商品规格参数';
 
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm_item;
+CREATE TABLE db_convenientbuy.cb_item_parm_item (
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY
+  COMMENT '',
+  item_id BIGINT(20) DEFAULT NULL COMMENT '',
+  param_data text COMMENT '参数数据，格式为json格式',
+  created     DATETIME   DEFAULT NULL
+  COMMENT '创建时间',
+  updated     DATETIME   DEFAULT NULL
+  COMMENT '更新时间',
 );
-
-
 
 SELECT *
 FROM db_convenientbuy.cb_content;
