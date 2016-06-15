@@ -107,7 +107,25 @@ CREATE TABLE db_convenientbuy.cb_item_cat (
 )
   COMMENT '商品类别';
 
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_decs;
+CREATE TABLE db_convenientbuy.cb_item_desc (
+  item_id   BIGINT(20) AUTO_INCREMENT PRIMARY KEY
+  COMMENT ' PK 商品 ID',
+  item_desc TEXT COMMENT '商品描述',
+  created   DATETIME   DEFAULT NULL
+  COMMENT '创建时间',
+  updated   DATETIME   DEFAULT NULL
+  COMMENT '更新时间'
+)
+  COMMENT '商品描述表';
 
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm;
+CREATE TABLE db_convenientbuy.cb_item_parm(
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY COMMENT '',
+  item_cat_id BIGINT(20) DEFAULT NULL COMMENT '',
+  parm_data TEXT COMMENT '',
+
+);
 
 
 
