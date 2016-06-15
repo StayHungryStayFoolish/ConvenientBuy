@@ -21,17 +21,18 @@ CREATE TABLE db_convenientbuy.cb_content (
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_content_category;
 CREATE TABLE db_convenientbuy.cb_content_category (
-  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY COMMENT '',
-  parent_id BIGINT(20) DEFAULT NULL COMMENT '',
-  name VARCHAR(50) DEFAULT NULL COMMENT '',
-  status INT(1) DEFAULT '1' COMMENT '',
-  sort_order INT(4) DEFAULT NULL COMMENT '',
-  is_parent TINYINT(1) DEFAULT '1' COMMENT '',
+  id BIGINT(20) AUTO_INCREMENT PRIMARY KEY COMMENT 'PK ID',
+  parent_id BIGINT(20) DEFAULT NULL COMMENT '父类 ID=0，代表一级',
+  name VARCHAR(50) DEFAULT NULL COMMENT '类别名称',
+  status INT(1) DEFAULT '1' COMMENT '状态，1正常/2删除',
+  sort_order INT(4) DEFAULT NULL COMMENT '排序，同级类别展示次序。',
+  is_parent TINYINT(1) DEFAULT '1' COMMENT '1 true/ 2false',
   created DATETIME DEFAULT NULL COMMENT '创建时间',
   updated DATETIME DEFAULT NULL COMMENT '更新时间',
   KEY parent_id (parent_id,status) USING BTREE,
   KEY sort_order(sort_order)
-) COMMENT '';
+) COMMENT 'CMS - 类目分类表';
+
 
 
 SELECT *
