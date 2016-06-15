@@ -149,5 +149,55 @@ CREATE TABLE db_convenientbuy.cb_item_parm_item (
 )
   COMMENT '商品规格和商品关系表';
 
+DROP TABLE IF EXISTS db_convenientbuy.cb_orde;
+CREATE TABLE db_convenientbuy.cb_orde (
+  order_id      VARCHAR(50)
+                COLLATE utf8_bin PRIMARY KEY DEFAULT NULL
+  COMMENT '',
+  payment       VARCHAR(50)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '',
+  payment_type  INT(2)                       DEFAULT NULL
+  COMMENT '',
+  post_fee      VARCHAR(50)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '',
+  status        INT(10)                      DEFAULT NULL
+  COMMENT '状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭',
+  create_time   DATETIME                     DEFAULT NULL
+  COMMENT '订单创建时间',
+  update_time   DATETIME                     DEFAULT NULL
+  COMMENT '订单更新时间',
+  payment_time  DATETIME                     DEFAULT NULL
+  COMMENT '付款时间',
+  consign_time  DATETIME                     DEFAULT NULL
+  COMMENT '发货时间',
+  end_time      DATETIME                     DEFAULT NULL
+  COMMENT '交易完成时间',
+  close_time    DATETIME                     DEFAULT NULL
+  COMMENT '交易关闭时间',
+  shipping_name VARCHAR(20)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '物流名称',
+  shipping_code VARCHAR(20)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '物流单号',
+  user_id       BIGINT(20)                   DEFAULT NULL
+  COMMENT '用户id',
+  buyer_message VARCHAR(100)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '买家留言',
+  buyer_nick    VARCHAR(50)
+                COLLATE utf8_bin             DEFAULT NULL
+  COMMENT '买家昵称',
+  buyer_rate    INT(2)                       DEFAULT NULL
+  COMMENT '买家是否已经评价',
+  KEY create_time (create_time),
+  KEY buyer_nick (buyer_nick),
+  KEY status (status),
+  KEY payment_type (payment_type)
+)
+  COMMENT '订单表';
+
 SELECT *
 FROM db_convenientbuy.cb_content;
