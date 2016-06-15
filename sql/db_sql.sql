@@ -55,25 +55,25 @@ CREATE TABLE db_convenientbuy.cb_content_category (
   COMMENT 'CMS - 类目分类表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_item;
-CREATE TABLE db_convenientbuy.cb_iteme (
+CREATE TABLE db_convenientbuy.cb_item (
   id         BIGINT(20)            AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK ID',
   title      VARCHAR(100) NOT NULL
-  COMMENT '',
+  COMMENT '商品标题',
   sell_point VARCHAR(500)          DEFAULT NULL
-  COMMENT '',
+  COMMENT '商品卖点',
   price      BIGINT(20)   NOT NULL
-  COMMENT '',
+  COMMENT '商家价格，单位 分',
   num        INT(10)      NOT NULL
-  COMMENT '',
+  COMMENT '库存数量',
   barcode    VARCHAR(30)           DEFAULT NULL
-  COMMENT '',
+  COMMENT '条形码',
   image      VARCHAR(500)          DEFAULT NULL
-  COMMENT '',
+  COMMENT '图片',
   cid        BIGINT(10)   NOT NULL
-  COMMENT '',
+  COMMENT '类别 ID',
   status     TINYINT(4)   NOT NULL DEFAULT '1'
-  COMMENT '',
+  COMMENT '状态 1正常/2下架/3删除',
   created    DATETIME              DEFAULT NULL
   COMMENT '创建时间',
   updated    DATETIME              DEFAULT NULL
@@ -81,6 +81,29 @@ CREATE TABLE db_convenientbuy.cb_iteme (
   KEY cid(cid),
   KEY status(status),
   KEY updated(updated)
+)
+  COMMENT '';
+
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_cat;
+CREATE TABLE db_convenientbuy.cb_item_cat (
+  id         BIGINT(20)  AUTO_INCREMENT PRIMARY KEY
+  COMMENT '',
+  prient_id  BIGINT(20)  DEFAULT NULL
+  COMMENT '',
+  name       VARCHAR(50) DEFAULT NULL
+  COMMENT '',
+  status     INT(1)      DEFAULT '1'
+  COMMENT '',
+  sort_order INT(4)      DEFAULT '1'
+  COMMENT '',
+  is_parent  TINYINT(1)  DEFAULT '1'
+  COMMENT '',
+  created    DATETIME    DEFAULT NULL
+  COMMENT '创建时间',
+  updated    DATETIME    DEFAULT NULL
+  COMMENT '更新时间',
+  KEY parent_id(prient_id) USING BTREE,
+  KEY sort_order(sort_order)
 )
   COMMENT '';
 
