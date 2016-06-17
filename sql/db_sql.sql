@@ -1,34 +1,24 @@
 DROP DATABASE IF EXISTS db_convenientbuy;
 CREATE DATABASE db_convenientbuy;
+USE db_convenientbuy;
 
-DROP TABLE IF EXISTS db_convenientbuy.cb_content;
-CREATE TABLE db_convenientbuy.cb_content (
-  id          BIGINT(20)   AUTO_INCREMENT PRIMARY KEY
-  COMMENT 'PK ID',
-  category_id BIGINT(20) NOT NULL
-  COMMENT '类别 ID',
-  title       VARCHAR(200) DEFAULT NULL
-  COMMENT '标题',
-  sub_title   VARCHAR(100) DEFAULT NULL
-  COMMENT '子标题',
-  title_desc  VARCHAR(500) DEFAULT NULL
-  COMMENT '标题描述',
-  url         VARCHAR(300) DEFAULT NULL
-  COMMENT '链接',
-  pic         VARCHAR(400) DEFAULT NULL
-  COMMENT '图片1绝对路径',
-  pic2        VARCHAR(400) DEFAULT NULL
-  COMMENT '图片2绝对路径',
-  content     DATETIME     DEFAULT NULL
-  COMMENT '内容',
-  created     DATETIME     DEFAULT NULL
-  COMMENT '创建时间',
-  updated     DATETIME     DEFAULT NULL
-  COMMENT '更新时间',
-  KEY category_id(category_id),
-  KEY updated(updated)
-)
-  COMMENT '首页展示图';
+DROP TABLE IF EXISTS cb_content;
+CREATE TABLE cb_content (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `category_id` bigint(20) NOT NULL COMMENT '内容类目ID',
+  `title` varchar(200) DEFAULT NULL COMMENT '内容标题',
+  `sub_title` varchar(100) DEFAULT NULL COMMENT '子标题',
+  `title_desc` varchar(500) DEFAULT NULL COMMENT '标题描述',
+  `url` varchar(500) DEFAULT NULL COMMENT '链接',
+  `pic` varchar(300) DEFAULT NULL COMMENT '图片绝对路径',
+  `pic2` varchar(300) DEFAULT NULL COMMENT '图片2',
+  `content` text COMMENT '内容',
+  `created` datetime DEFAULT NULL,
+  `updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  KEY `updated` (`updated`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_content_category;
@@ -200,7 +190,7 @@ CREATE TABLE db_convenientbuy.cb_orde (
   COMMENT '订单表';
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_order_item;
-CREATE TABLE cb_convenientbuy.cb_order_item (
+CREATE TABLE db_convenientbuy.cb_order_item (
   id        VARCHAR(20) PRIMARY KEY
   COLLATE utf8_bin
   COMMENT 'PK ID',
