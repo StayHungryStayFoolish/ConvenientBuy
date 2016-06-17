@@ -18,7 +18,7 @@ CREATE TABLE cb_content (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   KEY `updated` (`updated`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) COMMENT '首页商品内容展示表';
 
 
 DROP TABLE IF EXISTS db_convenientbuy.cb_content_category;
