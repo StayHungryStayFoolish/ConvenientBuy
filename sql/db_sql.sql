@@ -107,7 +107,7 @@ CREATE TABLE db_convenientbuy.cb_item_cat (
 )
   COMMENT '商品类别表';
 
-DROP TABLE IF EXISTS db_convenientbuy.cb_item_decs;
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_desc;
 CREATE TABLE db_convenientbuy.cb_item_desc (
   item_id   BIGINT(20) PRIMARY KEY
   COMMENT ' PK 商品 ID',
@@ -119,8 +119,8 @@ CREATE TABLE db_convenientbuy.cb_item_desc (
 )
   COMMENT '商品描述表';
 
-DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm;
-CREATE TABLE db_convenientbuy.cb_item_parm (
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_param;
+CREATE TABLE db_convenientbuy.cb_item_param (
   id          BIGINT(20) AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK ID',
   item_cat_id BIGINT(20) DEFAULT NULL
@@ -134,8 +134,8 @@ CREATE TABLE db_convenientbuy.cb_item_parm (
 )
   COMMENT '商品规格参数表';
 
-DROP TABLE IF EXISTS db_convenientbuy.cb_item_parm_item;
-CREATE TABLE db_convenientbuy.cb_item_parm_item (
+DROP TABLE IF EXISTS db_convenientbuy.cb_item_param_item;
+CREATE TABLE db_convenientbuy.cb_item_param_item (
   id         BIGINT(20) AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK ID',
   item_id    BIGINT(20) DEFAULT NULL
@@ -149,8 +149,8 @@ CREATE TABLE db_convenientbuy.cb_item_parm_item (
 )
   COMMENT '商品规格和商品关系表';
 
-DROP TABLE IF EXISTS db_convenientbuy.cb_orde;
-CREATE TABLE db_convenientbuy.cb_orde (
+DROP TABLE IF EXISTS db_convenientbuy.cb_order;
+CREATE TABLE db_convenientbuy.cb_order (
   order_id      VARCHAR(50)
                 COLLATE utf8_bin PRIMARY KEY
   COMMENT 'PK ID',
@@ -275,3 +275,36 @@ CREATE TABLE db_convenientbuy.cb_user (
   UNIQUE KEY email (email) USING BTREE
 )
   COMMENT '用户表';
+
+SELECT *
+FROM cb_content;
+
+SELECT *
+FROM cb_content_category;
+
+SELECT *
+FROM cb_item;
+
+SELECT *
+FROM cb_item_cat;
+
+SELECT *
+FROM cb_item_desc;
+
+SELECT *
+FROM cb_item_param;
+
+SELECT *
+FROM cb_item_param_item;
+
+SELECT *
+FROM cb_order;
+
+SELECT *
+FROM cb_order_item;
+
+SELECT *
+FROM cb_order_shipping;
+
+SELECT *
+FROM cb_user;
