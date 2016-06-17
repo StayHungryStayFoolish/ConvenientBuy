@@ -1,3 +1,4 @@
+# 良品购在线商品数据库
 DROP DATABASE IF EXISTS db_convenientbuy;
 CREATE DATABASE db_convenientbuy;
 USE db_convenientbuy;
