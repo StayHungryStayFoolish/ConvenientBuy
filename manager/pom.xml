@@ -16,6 +16,7 @@
         <module>manager-pojo</module>
         <module>manager-mapper</module>
         <module>manager-service</module>
+        <module>manager-web</module>
     </modules>
 
     <dependencies>
