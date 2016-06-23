@@ -12,6 +12,7 @@
     <artifactId>manager-mapper</artifactId>
 
     <dependencies>
+        <!-- 依赖 manager-pojo jar -->
         <dependency>
             <groupId>com.convenientbuy</groupId>
             <artifactId>manager-pojo</artifactId>
