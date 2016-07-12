@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by bonismo@hotmail.com
  * 下午9:49 on 16/7/12.
  */
-public class TbItemDesc {
+public class CbItemDesc {
     private Long itemId;
 
     private Date created;

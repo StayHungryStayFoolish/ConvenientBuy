@@ -7,14 +7,14 @@ import java.util.List;
  * Created by bonismo@hotmail.com
  * 下午9:54 on 16/7/12.
  */
-public class TbOrderItemExample {
+public class CbOrderItemExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbOrderItemExample() {
+    public CbOrderItemExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

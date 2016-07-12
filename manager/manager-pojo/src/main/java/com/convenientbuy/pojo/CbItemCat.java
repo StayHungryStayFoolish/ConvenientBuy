@@ -4,9 +4,9 @@ import java.util.Date;
 
 /**
  * Created by bonismo@hotmail.com
- * 下午9:45 on 16/7/12.
+ * 下午9:47 on 16/7/12.
  */
-public class TbContentCategory {
+public class CbItemCat {
     private Long id;
 
     private Long parentId;

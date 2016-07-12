@@ -4,7 +4,7 @@ package com.convenientbuy.pojo;
  * Created by bonismo@hotmail.com
  * 下午9:53 on 16/7/12.
  */
-public class TbOrderItem {
+public class CbOrderItem {
     private String id;
 
     private String itemId;

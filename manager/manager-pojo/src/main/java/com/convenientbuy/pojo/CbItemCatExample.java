@@ -8,14 +8,14 @@ import java.util.List;
  * Created by bonismo@hotmail.com
  * 下午9:48 on 16/7/12.
  */
-public class TbItemCatExample {
+public class CbItemCatExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbItemCatExample() {
+    public CbItemCatExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

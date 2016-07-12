@@ -6,16 +6,16 @@ import java.util.List;
 
 /**
  * Created by bonismo@hotmail.com
- * 下午9:51 on 16/7/12.
+ * 下午9:49 on 16/7/12.
  */
-public class TbItemParamExample {
+public class CbItemDescExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbItemParamExample() {
+    public CbItemDescExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -109,123 +109,63 @@ public class TbItemParamExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
+        public Criteria andItemIdIsNull() {
+            addCriterion("item_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
+        public Criteria andItemIdIsNotNull() {
+            addCriterion("item_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("id =", value, "id");
+        public Criteria andItemIdEqualTo(Long value) {
+            addCriterion("item_id =", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("id <>", value, "id");
+        public Criteria andItemIdNotEqualTo(Long value) {
+            addCriterion("item_id <>", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("id >", value, "id");
+        public Criteria andItemIdGreaterThan(Long value) {
+            addCriterion("item_id >", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("id >=", value, "id");
+        public Criteria andItemIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("item_id >=", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("id <", value, "id");
+        public Criteria andItemIdLessThan(Long value) {
+            addCriterion("item_id <", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("id <=", value, "id");
+        public Criteria andItemIdLessThanOrEqualTo(Long value) {
+            addCriterion("item_id <=", value, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("id in", values, "id");
+        public Criteria andItemIdIn(List<Long> values) {
+            addCriterion("item_id in", values, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("id not in", values, "id");
+        public Criteria andItemIdNotIn(List<Long> values) {
+            addCriterion("item_id not in", values, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("id between", value1, value2, "id");
+        public Criteria andItemIdBetween(Long value1, Long value2) {
+            addCriterion("item_id between", value1, value2, "itemId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdIsNull() {
-            addCriterion("item_cat_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdIsNotNull() {
-            addCriterion("item_cat_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdEqualTo(Long value) {
-            addCriterion("item_cat_id =", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdNotEqualTo(Long value) {
-            addCriterion("item_cat_id <>", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdGreaterThan(Long value) {
-            addCriterion("item_cat_id >", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("item_cat_id >=", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdLessThan(Long value) {
-            addCriterion("item_cat_id <", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdLessThanOrEqualTo(Long value) {
-            addCriterion("item_cat_id <=", value, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdIn(List<Long> values) {
-            addCriterion("item_cat_id in", values, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdNotIn(List<Long> values) {
-            addCriterion("item_cat_id not in", values, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdBetween(Long value1, Long value2) {
-            addCriterion("item_cat_id between", value1, value2, "itemCatId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCatIdNotBetween(Long value1, Long value2) {
-            addCriterion("item_cat_id not between", value1, value2, "itemCatId");
+        public Criteria andItemIdNotBetween(Long value1, Long value2) {
+            addCriterion("item_id not between", value1, value2, "itemId");
             return (Criteria) this;
         }
 

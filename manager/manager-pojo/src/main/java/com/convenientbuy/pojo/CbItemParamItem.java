@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by bonismo@hotmail.com
  * 下午9:51 on 16/7/12.
  */
-public class TbItemParamItem {
+public class CbItemParamItem {
     private Long id;
 
     private Long itemId;
