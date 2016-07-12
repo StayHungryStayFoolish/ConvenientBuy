@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by bonismo@hotmail.com
  * 下午9:55 on 16/7/12.
  */
-public class TbOrderShipping {
+public class CbOrderShipping {
     private String orderId;
 
     private String receiverName;
