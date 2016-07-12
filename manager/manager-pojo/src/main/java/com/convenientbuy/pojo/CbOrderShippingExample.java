@@ -8,14 +8,15 @@ import java.util.List;
  * Created by bonismo@hotmail.com
  * 下午9:57 on 16/7/12.
  */
-public enum CbOrderShippingExample {
+public class CbOrderShippingExample {
+
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TbOrderShippingExample() {
+    public CbOrderShippingExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
