@@ -86,6 +86,12 @@ public class Result {
 
 // Json / Result 互相转换   -----------------------------------------------------------------------
 
+    /**
+     * Json -> Result 对象
+     * @param jsonData json
+     * @param clazz Result
+     * @return Result
+     */
     public static Result formatToPojo(String jsonData, Class<?> clazz) {
         try {
             if (clazz == null) {
