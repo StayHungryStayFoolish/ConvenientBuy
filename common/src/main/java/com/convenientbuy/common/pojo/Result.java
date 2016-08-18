@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by bonismo@hotmail.com
@@ -133,9 +134,14 @@ public class Result {
         try {
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("data");
-
+            Object object = null;
+            if (data.isArray() && data.size() > 0) {
+                object = MAPPER.readValue(data.traverse(), MAPPER.getTypeFactory().constructCollectionType(List.class, clazz));
+            }
+            return build(jsonNode.get("status").intValue(), jsonNode.get("msg").asText(), object);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 }
