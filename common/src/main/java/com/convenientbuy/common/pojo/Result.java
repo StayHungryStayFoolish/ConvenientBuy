@@ -97,8 +97,11 @@ public class Result {
             if (clazz != null) {
                 if (data.isObject()) {
                     object = MAPPER.readValue(data.traverse(), clazz);
+                } else if (data.isTextual()) {
+                    object = MAPPER.readValue(data.asText(), clazz);
                 }
             }
+            return build(jsonNode.get("status").intValue(), jsonNode.get("msg").asText(), object);
         } catch (Exception e) {
             return null;
         }
