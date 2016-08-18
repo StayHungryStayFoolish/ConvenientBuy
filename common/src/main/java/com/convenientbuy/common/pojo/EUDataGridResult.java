@@ -1,29 +1,26 @@
 package com.convenientbuy.common.pojo;
 
+import java.util.List;
+
 /**
  * Created by bonismo@hotmail.com
  * 下午10:04 on 16/8/18.
  */
 public class EUDataGridResult {
-    private long id;
-    private String text;
-    private String state;
-    public long getId() {
-        return id;
+
+    private long total;
+    private List<?> rows;
+    public long getTotal() {
+        return total;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setTotal(long total) {
+        this.total = total;
     }
-    public String getText() {
-        return text;
+    public List<?> getRows() {
+        return rows;
     }
-    public void setText(String text) {
-        this.text = text;
+    public void setRows(List<?> rows) {
+        this.rows = rows;
     }
-    public String getState() {
-        return state;
-    }
-    public void setState(String state) {
-        this.state = state;
-    }
+
 }
