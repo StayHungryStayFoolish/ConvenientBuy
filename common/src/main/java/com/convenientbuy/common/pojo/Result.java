@@ -3,6 +3,8 @@ package com.convenientbuy.common.pojo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+
 /**
  * Created by bonismo@hotmail.com
  * 下午10:31 on 16/8/18.
@@ -113,4 +115,27 @@ public class Result {
         }
     }
 
+    /**
+     * 不转化为 Object 对象
+     * @param json
+     * @return
+     */
+    public static Result format(String json) {
+        try {
+            return MAPPER.readValue(json, Result.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Result formatToList(String jsonData, Class<?> clazz) {
+        try {
+            JsonNode jsonNode = MAPPER.readTree(jsonData);
+            JsonNode data = jsonNode.get("data");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
