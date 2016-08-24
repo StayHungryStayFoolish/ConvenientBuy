@@ -182,5 +182,38 @@ public class CookieUtils {
         }
     }
 
+    /**
+     * 设置 Cookie 值,指定生效时间,并指定编码集
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage 生效时间
+     * @param encodeString 编码集
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
+        try {
+            if (cookieValue == null) {
+                cookieValue = "";
+            } else {
+                cookieValue = URLEncoder.encode(cookieValue, encodeString);
+            }
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage > 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) {// 设置域名的cookie
+                String domainName = getDomainName(request);
+                System.out.println(domainName);
+                if (!"localhost".equals(domainName)) {
+                    cookie.setDomain(domainName);
+                }
+            }
+            cookie.setPath("/");
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
