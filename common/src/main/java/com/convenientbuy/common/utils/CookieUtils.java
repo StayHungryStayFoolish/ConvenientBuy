@@ -15,6 +15,7 @@ public class CookieUtils {
 
     /**
      * 获取 Cookie 值, 不进行编码
+     *
      * @param request
      * @param cookieName
      * @return
@@ -25,9 +26,10 @@ public class CookieUtils {
 
     /**
      * 根据 Cookie 值,确定是否编码
+     *
      * @param request
      * @param cookieName Cookie
-     * @param isDecoder 是否编码
+     * @param isDecoder  是否编码
      * @return
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
@@ -54,6 +56,7 @@ public class CookieUtils {
 
     /**
      * 根据传入编码集, 进行 Cookie 编码
+     *
      * @param request
      * @param cookieName
      * @param encodeString 编码集
@@ -80,9 +83,10 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值, 不设置时长,关闭浏览器即失效,不编码
+     *
      * @param request
      * @param response
-     * @param cookieName Cookie 名字
+     * @param cookieName  Cookie 名字
      * @param cookieValue Cookie 值
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue) {
@@ -91,6 +95,7 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值, 指定时间内生效,不编码
+     *
      * @param request
      * @param response
      * @param cookieName
@@ -103,11 +108,12 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值,不设置时间,可以选择是否编码
+     *
      * @param request
      * @param response
      * @param cookieName
      * @param cookieValue
-     * @param isEncode true 编码 / false 不编码
+     * @param isEncode    true 编码 / false 不编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, boolean isEncode) {
         setCookie(request, response, cookieName, cookieValue, -1, isEncode);
@@ -115,12 +121,13 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值,生效时间,可以选择是否编码
+     *
      * @param request
      * @param response
      * @param cookieName
      * @param cookieValue
      * @param cookieMaxage
-     * @param isEncode true 编码 / false 不编码
+     * @param isEncode     true 编码 / false 不编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
@@ -128,6 +135,7 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值,生效指定,指定编码集
+     *
      * @param request
      * @param response
      * @param cookieName
@@ -141,6 +149,7 @@ public class CookieUtils {
 
     /**
      * 删除 Cookie 及 Cookie携带的域名
+     *
      * @param request
      * @param response
      * @param cookieName
@@ -151,12 +160,13 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值,在指定时间内生效
+     *
      * @param request
      * @param response
      * @param cookieName
      * @param cookieValue
      * @param cookieMaxage -1为失效
-     * @param isEncode 是否编码
+     * @param isEncode     是否编码
      */
     private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
@@ -184,6 +194,7 @@ public class CookieUtils {
 
     /**
      * 设置 Cookie 值,指定生效时间,并指定编码集
+     *
      * @param request
      * @param response
      * @param cookieName
@@ -217,6 +228,7 @@ public class CookieUtils {
 
     /**
      * 获取 cookie 域名
+     *
      * @param request
      * @return
      */
