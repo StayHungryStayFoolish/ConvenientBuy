@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 /**
  * Created by bonismo@hotmail.com
@@ -101,22 +102,42 @@ public class CookieUtils {
     }
 
     /**
-     *
+     * 设置 Cookie 值,不设置时间,可以选择是否编码
      * @param request
      * @param response
      * @param cookieName
      * @param cookieValue
-     * @param isEncode
+     * @param isEncode true 编码 / false 不编码
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, boolean isEncode) {
         setCookie(request, response, cookieName, cookieValue, -1, isEncode);
     }
 
+    /**
+     * 设置 Cookie 值,生效时间,可以选择是否编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     * @param isEncode true 编码 / false 不编码
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
+    }
+
+    /**
+     * 设置 Cookie 值,生效指定,指定编码集
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage
+     * @param encodeString
+     */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
     }
 
-    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
-        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
-    }
+
 }
