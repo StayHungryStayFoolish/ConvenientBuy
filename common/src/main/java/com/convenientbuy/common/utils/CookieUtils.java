@@ -139,5 +139,48 @@ public class CookieUtils {
         doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
     }
 
+    /**
+     * 删除 Cookie 及 Cookie携带的域名
+     * @param request
+     * @param response
+     * @param cookieName
+     */
+    public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {
+        doSetCookie(request, response, cookieName, "", -1, false);
+    }
+
+    /**
+     * 设置 Cookie 值,在指定时间内生效
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage -1为失效
+     * @param isEncode 是否编码
+     */
+    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+        try {
+            if (cookieValue == null) {
+                cookieValue = "";
+            } else if (isEncode) {
+                cookieValue = URLEncoder.encode(cookieValue, "utf-8");
+            }
+            Cookie cookie = new Cookie(cookieName, cookieValue);
+            if (cookieMaxage > 0)
+                cookie.setMaxAge(cookieMaxage);
+            if (null != request) {// 设置域名的cookie
+                String domainName = getDomainName(request);
+                System.out.println(domainName);
+                if (!"localhost".equals(domainName)) {
+                    cookie.setDomain(domainName);
+                }
+            }
+            cookie.setPath("/");
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
