@@ -2,6 +2,7 @@ package com.convenientbuy.common.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -50,6 +51,13 @@ public class CookieUtils {
     }
 
 
+    /**
+     * 根据传入编码集, 进行 Cookie 编码
+     * @param request
+     * @param cookieName
+     * @param encodeString 编码集
+     * @return
+     */
     public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null || cookieName == null) {
@@ -67,5 +75,48 @@ public class CookieUtils {
             e.printStackTrace();
         }
         return resultValue;
+    }
+
+    /**
+     * 设置 Cookie 值, 不设置时长,关闭浏览器即失效,不编码
+     * @param request
+     * @param response
+     * @param cookieName Cookie 名字
+     * @param cookieValue Cookie 值
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue) {
+        setCookie(request, response, cookieName, cookieValue, -1);
+    }
+
+    /**
+     * 设置 Cookie 值, 指定时间内生效,不编码
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param cookieMaxage 生效时间
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage) {
+        setCookie(request, response, cookieName, cookieValue, false);
+    }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @param cookieName
+     * @param cookieValue
+     * @param isEncode
+     */
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, boolean isEncode) {
+        setCookie(request, response, cookieName, cookieValue, -1, isEncode);
+    }
+
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, encodeString);
+    }
+
+    public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+        doSetCookie(request, response, cookieName, cookieValue, cookieMaxage, isEncode);
     }
 }
