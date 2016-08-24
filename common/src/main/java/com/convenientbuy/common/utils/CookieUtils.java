@@ -2,6 +2,7 @@ package com.convenientbuy.common.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 /**
@@ -49,4 +50,22 @@ public class CookieUtils {
     }
 
 
+    public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null || cookieName == null) {
+            return null;
+        }
+        String resultValue = null;
+        try {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals(cookieName)) {
+                    resultValue = URLDecoder.decode(cookies[i].getValue(), encodeString);
+                    break;
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return resultValue;
+    }
 }
