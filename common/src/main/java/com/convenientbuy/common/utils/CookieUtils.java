@@ -10,6 +10,8 @@ import java.net.URLEncoder;
 /**
  * Created by bonismo@hotmail.com
  * 下午10:32 on 16/8/24.
+ *
+ * Cookie 操作工具
  */
 public class CookieUtils {
 
