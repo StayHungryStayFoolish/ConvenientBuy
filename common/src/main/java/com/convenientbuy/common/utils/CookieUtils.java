@@ -1,7 +1,5 @@
 package com.convenientbuy.common.utils;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
@@ -23,10 +21,10 @@ public class CookieUtils {
     }
 
     /**
-     *
+     * 根据 Cookie 值,确定是否编码
      * @param request
-     * @param cookieName
-     * @param isDecoder
+     * @param cookieName Cookie
+     * @param isDecoder 是否编码
      * @return
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
