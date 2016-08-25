@@ -1,7 +1,6 @@
 package com.convenientbuy.common.utils;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -135,14 +134,23 @@ public class HttpClientUtil {
         return resultStr;
     }
 
+    /**
+     * 处理 json 数据格式的 Post 请求
+     *
+     * @param url
+     * @param json
+     * @return
+     */
     public static String doPostJson(String url, String json) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         String resultStr = "";
         try {
             HttpPost httpPost = new HttpPost();
+            // 创建一个 json 数据格式的实体对象
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             httpPost.setEntity(entity);
+            // 执行 Post 请求
             response = httpClient.execute(httpPost);
             resultStr = EntityUtils.toString(response.getEntity(), "UTF-8");
         } catch (IOException e) {
