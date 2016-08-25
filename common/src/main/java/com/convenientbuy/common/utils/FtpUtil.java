@@ -1,5 +1,6 @@
 package com.convenientbuy.common.utils;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
@@ -44,9 +45,29 @@ public class FtpUtil {
                     }
                 }
             }
+            // 设置文件上传类型为二进制类型
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            if (!ftpClient.storeFile(fileName, inputStream)) {
+                return result;
+            }
 
+            inputStream.close();
+            ftpClient.logout();
+            result = true;
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        return result;
     }
+
+
+
 }
