@@ -3,15 +3,18 @@ package com.convenientbuy.common.utils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -92,9 +95,27 @@ public class HttpClientUtil {
             if (null != param) {
                 List<NameValuePair> pairList = new ArrayList<>();
                 for (String key : param.keySet()) {
-
+                    pairList.add(new BasicNameValuePair(key, param.get(key)));
                 }
+                // 模拟 Post 表单
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(pairList);
+                httpPost.setEntity(entity);
+            }
+
+            // 执行 Post 请求
+            response = httpClient.execute(httpPost);
+            resultStr = EntityUtils.toString(response.getEntity(), "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                response.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+        return resultStr;
     }
+
+
 }
