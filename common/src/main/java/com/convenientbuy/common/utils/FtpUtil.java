@@ -6,7 +6,6 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.*;
-import java.net.SocketException;
 
 /**
  * Created by bonismo@hotmail.com
@@ -18,13 +17,14 @@ public class FtpUtil {
 
     /**
      * FTP 上传文件到服务器
-     * @param host url
-     * @param port 端口
-     * @param username 用户名
-     * @param password 密码
-     * @param basePath 基本url
-     * @param filePath 文件路径
-     * @param fileName 文件名字
+     *
+     * @param host        url
+     * @param port        端口
+     * @param username    用户名
+     * @param password    密码
+     * @param basePath    基本url
+     * @param filePath    文件路径
+     * @param fileName    文件名字
      * @param inputStream 输入流
      * @return true 上传成功 / false 上传失败
      */
@@ -81,7 +81,19 @@ public class FtpUtil {
         return result;
     }
 
-    public static boolean downloadFile(String host, int port, String username, String password, String remotePath, String fileName, String localPath) throws SocketException {
+    /**
+     * FTP 服务器下载文件
+     *
+     * @param host       url
+     * @param port       端口
+     * @param username   用户名
+     * @param password   密码
+     * @param remotePath FTP 的 FQN 路径
+     * @param fileName   文件名字
+     * @param localPath  本地路径
+     * @return true 下载成功 / false 下载失败
+     */
+    public static boolean downloadFile(String host, int port, String username, String password, String remotePath, String fileName, String localPath) {
         boolean result = false;
         FTPClient ftpClient = new FTPClient();
         try {
