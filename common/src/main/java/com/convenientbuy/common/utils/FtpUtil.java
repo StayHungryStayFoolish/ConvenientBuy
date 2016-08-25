@@ -2,10 +2,11 @@ package com.convenientbuy.common.utils;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.SocketException;
 
 /**
  * Created by bonismo@hotmail.com
@@ -80,6 +81,43 @@ public class FtpUtil {
         return result;
     }
 
-
+    public static boolean downloadFile(String host, int port, String username, String password, String remotePath, String fileName, String localPath) throws SocketException {
+        boolean result = false;
+        FTPClient ftpClient = new FTPClient();
+        try {
+            int reply;
+            ftpClient.connect(host, port);
+            ftpClient.login(username, password);
+            reply = ftpClient.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                ftpClient.disconnect();
+                return result;
+            }
+            // 改变至 FTP 服务器目录
+            ftpClient.changeWorkingDirectory(remotePath);
+            FTPFile[] files = ftpClient.listFiles();
+            for (FTPFile file : files) {
+                if (file.getName().equals(fileName)) {
+                    File localFile = new File(localPath + "/" + file.getName());
+                    OutputStream out = new FileOutputStream(localFile);
+                    ftpClient.retrieveFile(file.getName(), out);
+                    out.close();
+                }
+            }
+            ftpClient.logout();
+            result = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftpClient.isConnected()) {
+                try {
+                    ftpClient.disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
 
 }
