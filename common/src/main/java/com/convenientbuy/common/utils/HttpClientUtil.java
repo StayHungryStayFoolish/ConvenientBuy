@@ -1,8 +1,6 @@
 package com.convenientbuy.common.utils;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,7 +12,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -85,6 +82,24 @@ public class HttpClientUtil {
         return resultStr;
     }
 
+
+    /**
+     * 处理 Post 请求,无参
+     *
+     * @param url
+     * @return
+     */
+    public static String doPost(String url) {
+        return doPost(url, null);
+    }
+
+    /**
+     * 处理 Post 请求,带参
+     *
+     * @param url
+     * @param param
+     * @return
+     */
     public static String doPost(String url, Map<String, String> param) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
