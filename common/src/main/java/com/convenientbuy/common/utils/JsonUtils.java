@@ -1,9 +1,11 @@
 package com.convenientbuy.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by bonismo@hotmail.com
@@ -19,6 +21,7 @@ public class JsonUtils {
 
     /**
      * Object -> JSON
+     *
      * @param data Object 对象
      * @return
      */
@@ -34,6 +37,7 @@ public class JsonUtils {
 
     /**
      * JSON -> Class
+     *
      * @param jsonData
      * @param beanType
      * @param <T>
@@ -49,5 +53,22 @@ public class JsonUtils {
         return null;
     }
 
-
+    /**
+     * JSON -> List<T>
+     *
+     * @param jsonData
+     * @param beanType
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> jsonToList(String jsonData, Class<T> beanType) {
+        JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
+        try {
+            List<T> list = MAPPER.readValue(jsonData, javaType);
+            return list;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
