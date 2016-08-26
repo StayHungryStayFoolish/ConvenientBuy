@@ -23,6 +23,8 @@ import java.util.Map;
 /**
  * Created by bonismo@hotmail.com
  * 下午10:39 on 16/8/25.
+ *
+ * HttpClient 工具,处理 Post / Get / 携带 Json 数据的 Post 请求
  */
 public class HttpClientUtil {
 
