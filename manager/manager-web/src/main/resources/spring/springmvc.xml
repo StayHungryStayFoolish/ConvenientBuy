@@ -8,6 +8,9 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="com.convenientbuy.controller" />
+
+	<!-- SpringMVC 三大组件 -->
+	<!-- 处理器映射器/处理器适配器采用注解驱动配置 -->
 	<mvc:annotation-driven />
 	<!-- 前段控制器 DispatcherServlet  视图映射器 HandlerMapping  视图适配器 HandlerAdapter 视图解析器 ViewResolver -->
 	<!-- 具体流程看资料 -->
