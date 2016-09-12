@@ -4,8 +4,8 @@ import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.pojo.CbItem;
 import com.convenientbuy.pojo.CbItemExample;
 import com.convenientbuy.service.ItemService;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
  * 下午10:49 on 16/9/11.
  */
 @Service
+//@MapperScan("com.convenientbuy.mapper")
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
@@ -22,6 +23,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public CbItem getItemById(long itemId) {
+        System.out.println(" 进入方法 ...");
         //添加查询条件
         CbItemExample example = new CbItemExample();
         CbItemExample.Criteria criteria = example.createCriteria();

@@ -211,6 +211,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!--这里进行配置，后会自动的加载mapper.xml文件　:配置Maven 对resource文件 过滤 -->
         <!--<pluginManagement>-->
             <!--<plugins>-->
                 <!--&lt;!&ndash; 配置Tomcat插件 &ndash;&gt;-->
