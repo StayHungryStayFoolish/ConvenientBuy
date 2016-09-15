@@ -6,6 +6,7 @@ import com.convenientbuy.pojo.CbItemCat;
 import com.convenientbuy.pojo.CbItemCatExample;
 import com.convenientbuy.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by bonismo@hotmail.com
  * 下午11:16 on 16/9/15.
  */
+@Service
 public class ItemCatServiceImpl implements ItemCatService {
 
     @Autowired

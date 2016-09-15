@@ -7,6 +7,7 @@ import com.convenientbuy.pojo.CbContentCategory;
 import com.convenientbuy.pojo.CbContentCategoryExample;
 import com.convenientbuy.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.List;
  * Created by bonismo@hotmail.com
  * 下午11:02 on 16/9/15.
  */
+@Service
 public class ContentCategoryServiceImpl implements ContentCategoryService {
 
     @Autowired
