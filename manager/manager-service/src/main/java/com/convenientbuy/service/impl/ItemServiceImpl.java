@@ -9,6 +9,7 @@ import com.convenientbuy.service.ItemService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.convenientbuy.pojo.CbItemParamItemExample.Criteria;
 
 import java.util.List;
 
