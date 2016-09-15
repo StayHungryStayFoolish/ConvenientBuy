@@ -20,11 +20,16 @@
 	</bean>
 	<!-- 配置 sqlsessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
 	<!-- 配置扫描包，加载mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.convenientbuy.mapper"></property>
+		<property name="basePackage" value="com.convenientbuy.mapper" />
+		<property name="sqlSessionTemplateBeanName" value="sessionTemplate"/>
 	</bean>
 </beans>

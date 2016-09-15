@@ -2,8 +2,9 @@ package com.convenientbuy.mapper;
 
 import com.convenientbuy.pojo.CbItem;
 import com.convenientbuy.pojo.CbItemExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Created by bonismo@hotmail.com
