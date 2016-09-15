@@ -1,5 +1,7 @@
 package com.convenientbuy.service.impl;
 
+import com.convenientbuy.common.pojo.EUDataGridResult;
+import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.pojo.CbItem;
 import com.convenientbuy.pojo.CbItemExample;
@@ -33,6 +35,16 @@ public class ItemServiceImpl implements ItemService {
             CbItem item = list.get(0);
             return item;
         }
+        return null;
+    }
+
+    @Override
+    public EUDataGridResult getItemList(int page, int rows) {
+        return null;
+    }
+
+    @Override
+    public Result createItem(CbItem item, String desc, String itemParam) throws Exception {
         return null;
     }
 }
