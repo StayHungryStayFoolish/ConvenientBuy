@@ -211,17 +211,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <!--这里进行配置，后会自动的加载mapper.xml文件　:配置Maven 对resource文件 过滤 -->
-        <!--<pluginManagement>-->
-            <!--<plugins>-->
-                <!--&lt;!&ndash; 配置Tomcat插件 &ndash;&gt;-->
-                <!--<plugin>-->
-                    <!--<groupId>org.apache.tomcat.maven</groupId>-->
-                    <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-                    <!--<version>2.2</version>-->
-                <!--</plugin>-->
-            <!--</plugins>-->
-        <!--</pluginManagement>-->
     </build>
 
 </project>

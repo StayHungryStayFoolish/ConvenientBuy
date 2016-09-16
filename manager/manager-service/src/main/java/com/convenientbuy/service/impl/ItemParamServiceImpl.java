@@ -5,6 +5,7 @@ import com.convenientbuy.mapper.CbItemParamMapper;
 import com.convenientbuy.pojo.CbItemParam;
 import com.convenientbuy.pojo.CbItemParamExample;
 import com.convenientbuy.service.ItemParamService;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * 下午11:36 on 16/9/15.
  */
 @Service
+@MapperScan("com.convenientbuy.mapper")
 public class ItemParamServiceImpl implements ItemParamService {
 
     @Autowired

@@ -24,8 +24,11 @@
 	<!-- 配置sqlsessionFactory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath*:mapper/*.xml"/>
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+
 	<!-- 配置扫描包，加载mapper代理对象 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.convenientbuy.mapper"></property>
