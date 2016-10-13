@@ -49,6 +49,12 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
         return resultList;
     }
 
+    /**
+     * 添加商品内容类别
+     * @param parentId
+     * @param name
+     * @return
+     */
     @Override
     public Result insertContentCategory(long parentId, String name) {
         //创建一个pojo

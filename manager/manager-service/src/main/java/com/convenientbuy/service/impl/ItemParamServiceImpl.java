@@ -23,6 +23,11 @@ public class ItemParamServiceImpl implements ItemParamService {
     @Autowired
     private CbItemParamMapper mapper;
 
+    /**
+     * 根据 ID 查询商品规格参数
+     * @param cid
+     * @return
+     */
     @Override
     public Result getItemParamByCid(long cid) {
         CbItemParamExample example = new CbItemParamExample();
@@ -37,6 +42,11 @@ public class ItemParamServiceImpl implements ItemParamService {
         return Result.ok();
     }
 
+    /**
+     * 添加商品规格参数
+     * @param itemParam
+     * @return
+     */
     @Override
     public Result insertItemParam(CbItemParam itemParam) {
         //补全pojo
