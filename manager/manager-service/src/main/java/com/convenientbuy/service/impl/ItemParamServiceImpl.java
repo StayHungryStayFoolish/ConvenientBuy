@@ -17,7 +17,6 @@ import java.util.List;
  * 下午11:36 on 16/9/15.
  */
 @Service
-@MapperScan("com.convenientbuy.mapper")
 public class ItemParamServiceImpl implements ItemParamService {
 
     @Autowired
