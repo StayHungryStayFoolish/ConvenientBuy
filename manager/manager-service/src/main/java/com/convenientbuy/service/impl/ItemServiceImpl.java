@@ -6,17 +6,15 @@ import com.convenientbuy.common.utils.IDUtils;
 import com.convenientbuy.mapper.CbItemDescMapper;
 import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.mapper.CbItemParamItemMapper;
-import com.convenientbuy.mapper.CbItemParamMapper;
 import com.convenientbuy.pojo.CbItem;
 import com.convenientbuy.pojo.CbItemDesc;
 import com.convenientbuy.pojo.CbItemExample;
+import com.convenientbuy.pojo.CbItemParamItem;
 import com.convenientbuy.service.ItemService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.convenientbuy.pojo.CbItemParamItemExample.Criteria;
 
 import java.util.Date;
 import java.util.List;
@@ -36,6 +34,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private CbItemParamItemMapper cbItemParamItemMapper;
+
     @Override
     public CbItem getItemById(long itemId) {
         System.out.println(" 进入方法 ...");
@@ -63,6 +62,14 @@ public class ItemServiceImpl implements ItemService {
         return result;
     }
 
+    /**
+     * 添加商品
+     * @param item 商品
+     * @param desc 描述
+     * @param itemParam 商品规格
+     * @return
+     * @throws Exception
+     */
     @Override
     public Result createItem(CbItem item, String desc, String itemParam) throws Exception {
         Long itemId = IDUtils.getItemId();
@@ -86,6 +93,12 @@ public class ItemServiceImpl implements ItemService {
         return Result.ok();
     }
 
+    /**
+     * 添加商品描述
+     * @param itemId
+     * @param desc
+     * @return
+     */
     private Result insertItemDesc(Long itemId, String desc) {
         CbItemDesc itemDesc = new CbItemDesc();
         itemDesc.setItemId(itemId);
@@ -94,5 +107,25 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setUpdated(new Date());
         itemDescMapper.insert(itemDesc);
         return Result.ok();
+    }
+
+    /**
+     * 添加规格参数
+     * @param itemId
+     * @param itemParam
+     * @return
+     */
+    private Result insertItemParamItem(Long itemId, String itemParam) {
+        //创建一个pojo
+        CbItemParamItem itemParamItem = new CbItemParamItem();
+        itemParamItem.setItemId(itemId);
+        itemParamItem.setParamData(itemParam);
+        itemParamItem.setCreated(new Date());
+        itemParamItem.setUpdated(new Date());
+        //向表中插入数据
+        cbItemParamItemMapper.insert(itemParamItem);
+
+        return Result.ok();
+
     }
 }
