@@ -31,6 +31,11 @@ public class PictureServiceImpl implements PictureService {
     @Value("${IMAGE_BASE_URL}")
     private String IMAGE_BASE_URL;
 
+    /**
+     * 上传图片到远程图片服务器
+     * @param uploadFile
+     * @return
+     */
     @Override
     public Map uploadPicture(MultipartFile uploadFile) {
         Map resultMap = new HashMap<>();
@@ -38,9 +43,8 @@ public class PictureServiceImpl implements PictureService {
             //生成一个新的文件名
             //取原始文件名
             String oldName = uploadFile.getOriginalFilename();
-            //生成新文件名
-            //UUID.randomUUID();
             String newName = IDUtils.genImageName();
+            // 图片名字+后缀格式
             newName = newName + oldName.substring(oldName.lastIndexOf("."));
             //图片上传
             String imagePath = new DateTime().toString("/yyyy/MM/dd");
