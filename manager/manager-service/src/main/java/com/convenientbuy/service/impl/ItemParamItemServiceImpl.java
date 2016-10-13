@@ -22,6 +22,11 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
     @Autowired
     private CbItemParamItemMapper mapper;
 
+    /**
+     * 根据商品 ID 查询规格参数
+     * @param itemId
+     * @return
+     */
     @Override
     public String getItemParamByItemId(Long itemId) {
         //根据商品id查询规格参数

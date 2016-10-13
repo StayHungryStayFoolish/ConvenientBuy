@@ -21,6 +21,11 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Autowired
     private CbItemCatMapper itemCatMapper;
 
+    /**
+     * 根据父类获取商品列表
+     * @param parentId
+     * @return
+     */
     @Override
     public List<EUTreeNode> getCatList(long parentId) {
         //创建查询条件
