@@ -51,6 +51,7 @@ public class ItemController {
 
     /**
      * 添加商品基本信息/描述/规格参数
+     * item-add.sjp
      *
      * @param item       商品
      * @param desc       商品描述
