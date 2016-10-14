@@ -1,6 +1,7 @@
 package com.convenientbuy.controller;
 
 import com.convenientbuy.common.pojo.EUTreeNode;
+import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.service.ContentCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,28 @@ public class ContentCategoryController {
     @Autowired
     private ContentCategoryService service;
 
+    /**
+     * 获取商品分类列表,默认0,打开父类
+     * @param parentId
+     * @return
+     */
     @RequestMapping("/list")
     @ResponseBody
     public List<EUTreeNode> getContentCatList(@RequestParam(value = "id", defaultValue = "0") Long parentId) {
         List<EUTreeNode> list = service.getCategoryList(parentId);
         return list;
+    }
+
+    /**
+     * 商品TREE,创建节点
+     * @param parentId
+     * @param name
+     * @return
+     */
+    @RequestMapping("/create")
+    @ResponseBody
+    public Result createContentCategory(Long parentId, String name) {
+        Result result = service.insertContentCategory(parentId, name);
+        return result;
     }
 }
