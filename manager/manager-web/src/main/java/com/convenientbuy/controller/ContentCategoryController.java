@@ -25,6 +25,7 @@ public class ContentCategoryController {
     /**
      * 获取商品分类列表,默认0,打开父类
      * content.jsp
+     *
      * @param parentId
      * @return
      */
@@ -38,6 +39,7 @@ public class ContentCategoryController {
     /**
      * 商品TREE,创建节点
      * content.jsp
+     *
      * @param parentId
      * @param name
      * @return
