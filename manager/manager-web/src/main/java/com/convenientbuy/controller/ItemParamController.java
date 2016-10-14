@@ -20,6 +20,13 @@ public class ItemParamController {
     @Autowired
     private ItemParamService service;
 
+    /**
+     * 根据商品 ID 查询规格
+     * item-param-add.jsp
+     *
+     * @param itemCatId
+     * @return
+     */
     @RequestMapping("/query/itemcatid/{itemCatId}")
     @ResponseBody
     public Result getItemParamByCid(@PathVariable Long itemCatId) {
@@ -27,6 +34,14 @@ public class ItemParamController {
         return result;
     }
 
+    /**
+     * 添加商品规格
+     * item-param-add.jsp
+     *
+     * @param cid
+     * @param paramData
+     * @return
+     */
     @RequestMapping("/save/{cid}")
     @ResponseBody
     public Result insertItemParam(@PathVariable Long cid, String paramData) {
