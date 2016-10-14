@@ -23,6 +23,7 @@ public class ItemController {
 
     /**
      * 根据商品 ID 查询数据
+     *
      * @param itemId
      * @return
      */
@@ -35,6 +36,7 @@ public class ItemController {
 
     /**
      * 分页查询
+     *
      * @param page
      * @param rows
      * @return
@@ -48,13 +50,14 @@ public class ItemController {
 
     /**
      * 添加商品基本信息/描述/规格参数
-     * @param item 商品
-     * @param desc 商品描述
+     *
+     * @param item       商品
+     * @param desc       商品描述
      * @param itemParams 规格参数
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/item/save", method= RequestMethod.POST)
+    @RequestMapping(value = "/item/save", method = RequestMethod.POST)
     @ResponseBody
     private Result createItem(CbItem item, String desc, String itemParams) throws Exception {
         Result result = itemService.createItem(item, desc, itemParams);
