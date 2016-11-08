@@ -15,8 +15,7 @@
 	<!-- 前段控制器 DispatcherServlet  视图映射器 HandlerMapping  视图适配器 HandlerAdapter 视图解析器 ViewResolver -->
 	<!-- 具体流程看资料 -->
 	<!-- Spring MVC 视图解析器 三大组件之一 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
