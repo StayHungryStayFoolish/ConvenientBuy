@@ -11,6 +11,7 @@
         <module>../common</module>
         <module>../manager</module>
         <module>../portal</module>
+        <module>../rest</module>
     </modules>
     <packaging>pom</packaging>
 
