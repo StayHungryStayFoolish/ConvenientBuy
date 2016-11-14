@@ -4,7 +4,7 @@ import com.convenientbuy.portal.pojo.ItemInfo;
 
 /**
  * Created by bonismo@hotmail.com
- * 下午9:43 on 17/10/6.
+ * 下午9:43 on 16/11/14.
  */
 public interface ItemService {
 

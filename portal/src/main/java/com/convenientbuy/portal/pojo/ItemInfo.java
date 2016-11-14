@@ -4,7 +4,7 @@ import com.convenientbuy.pojo.CbItem;
 
 /**
  * Created by bonismo@hotmail.com
- * 下午9:22 on 17/10/6.
+ * 下午9:22 on 16/11/14.
  */
 public class ItemInfo extends CbItem {
 

@@ -2,7 +2,7 @@ package com.convenientbuy.portal.service;
 
 /**
  * Created by bonismo@hotmail.com
- * 下午9:36 on 17/10/6.
+ * 下午9:36 on 16/11/14.
  */
 public interface ContentService {
 
