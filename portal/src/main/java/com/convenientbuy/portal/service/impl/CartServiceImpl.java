@@ -100,13 +100,38 @@ public class CartServiceImpl implements CartService {
         return new ArrayList<>();
     }
 
+    /**
+     * 获取商品列表
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public List<CartItem> getCartItemList(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        List<CartItem> itemList = getCartItemList(request);
+        return itemList;
     }
 
+    /**
+     * 根据商品 ID删除
+     *
+     * @param itemId
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public Result deleteCartItem(long itemId, HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        List<CartItem> itemList = getCartItemList(request);
+        for (CartItem cartItem : itemList) {
+            if (cartItem.getId() == itemId) {
+                itemList.remove(cartItem);
+                break;
+            }
+        }
+        // 数据更改后,需要重新更新 Cookie
+        CookieUtils.setCookie(request, response, "CON_CART", JsonUtils.objectToJSON(itemList), true);
+        return Result.ok();
     }
 }
