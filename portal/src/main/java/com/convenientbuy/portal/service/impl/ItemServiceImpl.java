@@ -2,6 +2,7 @@ package com.convenientbuy.portal.service.impl;
 
 import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.common.utils.HttpClientUtil;
+import com.convenientbuy.pojo.CbItemDesc;
 import com.convenientbuy.portal.pojo.ItemInfo;
 import com.convenientbuy.portal.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
@@ -51,9 +52,25 @@ public class ItemServiceImpl implements ItemService {
         return null;
     }
 
+    /**
+     * 根据商品 ID 获取商品描述数据
+     *
+     * @param itemId
+     * @return
+     */
     @Override
     public String getItemDescById(Long itemId) {
-
+        try {
+            String json = HttpClientUtil.doGet(REST_BASE_URL + ITEM_DESC_URL + itemId);
+            Result result = Result.formatToPojo(json, CbItemDesc.class);
+            if (result.getStatus() == 200) {
+                CbItemDesc itemDesc = (CbItemDesc) result.getData();
+                String resultDesc = itemDesc.getItemDesc();
+                return resultDesc;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
