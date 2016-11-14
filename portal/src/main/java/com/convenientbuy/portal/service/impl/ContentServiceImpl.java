@@ -2,13 +2,14 @@ package com.convenientbuy.portal.service.impl;
 
 import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.common.utils.HttpClientUtil;
+import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.pojo.CbContent;
 import com.convenientbuy.portal.service.ContentService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +34,27 @@ public class ContentServiceImpl implements ContentService {
         try {
             // 使用 Result 来接受 请求到的数据
             Result result = Result.formatToList(indexResult, CbContent.class);
-            // 获取轮播图内容类别
+            // 获取轮播图内容列表
             List<CbContent> list = (List<CbContent>) result.getData();
+            // 建立 Map, 用来存储轮播图信息
             List<Map> resultList = new ArrayList<>();
+            // 遍历 轮播图列表,不全轮播图的内容
             for (CbContent cbContent : list) {
-
+                Map map = new HashMap();
+                map.put("src", cbContent.getPic());
+                map.put("height", 240);
+                map.put("width", 670);
+                map.put("srcB", cbContent.getPic2());
+                map.put("widthB", 550);
+                map.put("heightB", 240);
+                map.put("href", cbContent.getUrl());
+                map.put("alt", cbContent.getSubTitle());
+                resultList.add(map);
             }
+            // 返回页面需要的数据
+            return JsonUtils.objectToJSON(resultList);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
