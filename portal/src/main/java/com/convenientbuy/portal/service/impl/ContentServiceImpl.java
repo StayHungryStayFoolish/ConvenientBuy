@@ -27,6 +27,11 @@ public class ContentServiceImpl implements ContentService {
     @Value("${REST_INDEX_AD_URL}")
     private String REST_INDEX_AD_URL;
 
+    /**
+     * 获取首页轮播图内容
+     *
+     * @return
+     */
     @Override
     public String getContenList() {
         // 调用 Rest 层 get 请求服务
