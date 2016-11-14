@@ -1,7 +1,9 @@
 package com.convenientbuy.portal.service.impl;
 
 import com.convenientbuy.common.pojo.Result;
+import com.convenientbuy.common.utils.CookieUtils;
 import com.convenientbuy.common.utils.HttpClientUtil;
+import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.pojo.CbItem;
 import com.convenientbuy.portal.pojo.CartItem;
 import com.convenientbuy.portal.service.CartService;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.channels.NonWritableChannelException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -71,6 +75,29 @@ public class CartServiceImpl implements CartService {
             }
             itemList.add(cartItem);
         }
+        CookieUtils.setCookie(request, response, "CON_CART", JsonUtils.objectToJSON(itemList), true);
+        return Result.ok();
+    }
+
+    /**
+     * 从 Cookie 中获取商品列表
+     *
+     * @param request
+     * @return
+     */
+    private List<CartItem> getCartItemList(HttpServletRequest request) {
+        String cartJson = CookieUtils.getCookieValue(request, "CON_CART", true);
+        if (null == cartJson) {
+            return new ArrayList<>();
+        }
+        // 将 json 数据转换为 商品列表
+        try {
+            List<CartItem> list = JsonUtils.jsonToList(cartJson, CartItem.class);
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     @Override
