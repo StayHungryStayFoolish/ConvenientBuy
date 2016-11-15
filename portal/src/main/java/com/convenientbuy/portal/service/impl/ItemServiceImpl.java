@@ -79,6 +79,12 @@ public class ItemServiceImpl implements ItemService {
         return null;
     }
 
+    /**
+     * 根据商品 ID 获取商品规格参数信息
+     *
+     * @param itemId
+     * @return
+     */
     @Override
     public String getItemParam(Long itemId) {
         try {
