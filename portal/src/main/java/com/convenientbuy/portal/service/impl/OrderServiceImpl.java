@@ -28,7 +28,9 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public String createOrder(Order order) {
+        // 调用创建订单 URL
         String json = HttpClientUtil.doPostJson(ORDER_BASE_URL + ORDER_CREATE_URL, JsonUtils.objectToJSON(order));
+        // 如果状态是 200,则获取订单 ID
         Result result = Result.format(json);
         if (result.getStatus() == 200) {
             Object orderId = result.getData();
