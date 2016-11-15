@@ -5,11 +5,13 @@ import com.convenientbuy.common.utils.HttpClientUtil;
 import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by bonismo@hotmail.com
  * 下午11:57 on 16/11/15.
  */
+@Service
 public class UserServiceImpl implements UserService {
 
     // 单点登录系统基础 URL
@@ -21,6 +23,10 @@ public class UserServiceImpl implements UserService {
     // 根据用户信息获取 Token URL
     @Value("${SSO_USER_TOKEN}")
     private String SSO_USER_TOKEN;
+
+    // 在 LoginInterceptor 调用
+    @Value("${SSO_PAGE_LOGIN}")
+    public String SSO_PAGE_LOGIN;
 
     /**
      * 通过 Token 获取用户信息
