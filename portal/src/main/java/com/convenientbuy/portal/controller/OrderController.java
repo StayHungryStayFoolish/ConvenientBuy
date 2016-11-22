@@ -1,8 +1,11 @@
 package com.convenientbuy.portal.controller;
 
+import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.portal.pojo.CartItem;
+import com.convenientbuy.portal.pojo.Order;
 import com.convenientbuy.portal.service.CartService;
 import com.convenientbuy.portal.service.OrderService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,5 +46,31 @@ public class OrderController {
         return "order-cart";
     }
 
-
+    /**
+     * 创建订单
+     *
+     * @param order
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping("/create")
+    public String createOrder(Order order, Model model, HttpServletRequest request) {
+        // 需要获取订单用户的信息
+        try {
+            CbUser user = (CbUser) request.getAttribute("user");
+            // 在order 中补全用户信息
+            order.setUserId(user.getId());
+            order.setBuyerNick(user.getUsername());
+            String orderId = orderService.createOrder(order);
+            model.addAttribute("orderId", orderId);
+            model.addAttribute("payment", order.getPayment());
+            model.addAttribute("date", new DateTime().plusDays(3).toString("yyyy-MM-dd"));
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("message", "创建订单出错。请稍后重试！");
+            return "error/exception";
+        }
+    }
 }
