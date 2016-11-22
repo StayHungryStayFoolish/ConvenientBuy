@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.awt.*;
-
 /**
  * Created by bonismo@hotmail.com
  * 下午10:20 on 16/11/22.
+ * <p>
+ * Index 页面
  */
 @Controller
 public class IndexController {

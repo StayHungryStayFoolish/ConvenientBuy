@@ -6,11 +6,13 @@ import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.portal.pojo.Order;
 import com.convenientbuy.portal.service.OrderService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by bonismo@hotmail.com
  * 下午10:34 on 16/11/15.
  */
+@Service
 public class OrderServiceImpl implements OrderService {
 
     // Order 系统基础 URL

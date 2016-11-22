@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by bonismo@hotmail.com
  * 下午10:29 on 16/11/22.
+ * <p>
+ * 商品信息展示
  */
 @Controller
 public class ItemController {
