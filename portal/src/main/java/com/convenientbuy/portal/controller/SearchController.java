@@ -2,7 +2,6 @@ package com.convenientbuy.portal.controller;
 
 import com.convenientbuy.portal.pojo.SearchResult;
 import com.convenientbuy.portal.service.SearchService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.UnsupportedEncodingException;
-import java.net.Inet4Address;
 
 /**
  * Created by bonismo@hotmail.com
@@ -22,6 +20,14 @@ public class SearchController {
     @Autowired
     private SearchService service;
 
+    /**
+     * 根据条件查询商品
+     *
+     * @param queryString
+     * @param page
+     * @param model
+     * @return
+     */
     @RequestMapping("/search")
     public String search(@RequestParam("q") String queryString, @RequestParam(defaultValue = "1") Integer page, Model model) {
         if (null != queryString) {
