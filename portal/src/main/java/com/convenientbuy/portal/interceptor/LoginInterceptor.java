@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  * 系统登录拦截器,在特殊应用场景进行拦截.
  * 该场景应用在 SSO 单点登录系统,进行用户登录拦截
  */
-@Controller
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
