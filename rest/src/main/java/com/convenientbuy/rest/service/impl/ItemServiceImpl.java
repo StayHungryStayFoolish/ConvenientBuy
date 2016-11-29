@@ -6,6 +6,7 @@ import com.convenientbuy.mapper.CbItemDescMapper;
 import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.mapper.CbItemParamItemMapper;
 import com.convenientbuy.pojo.CbItem;
+import com.convenientbuy.pojo.CbItemDesc;
 import com.convenientbuy.rest.dao.JedisClient;
 import com.convenientbuy.rest.service.ItemService;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +44,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 根据商品 ID 获取基本信息
-     * 1.从缓存获取 2.缓存没有,从数据库获取 3.添加查询到的数据到缓存中
+     * 1.从缓存获取 2.缓存没有,从数据库获取 3.添加查询到的数据到缓存中,并设置失效时间
      *
      * @param itemId
      * @return
@@ -75,9 +76,32 @@ public class ItemServiceImpl implements ItemService {
         return Result.ok(item);
     }
 
+    /**
+     * 根据商品 ID 获取描述信息
+     * 1.从缓存获取 2.缓存没有,从数据库获取 3.添加查询到的数据到缓存中,并设置失效时间
+     *
+     * @param itemId
+     * @return
+     */
     @Override
     public Result getItemDesc(long itemId) {
-        return null;
+        try {
+            String json = jedisClient.get(REDIS_ITEM_KEY + ":" + itemId + ":desc");
+            if (!StringUtils.isBlank(json)) {
+                CbItemDesc itemDesc = JsonUtils.jsonToPOJO(json, CbItemDesc.class);
+                return Result.ok(itemDesc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        CbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        try {
+            jedisClient.set(REDIS_ITEM_KEY + ":" + itemId + ":desc", JsonUtils.objectToJSON(itemDesc));
+            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":desc", REDIS_ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok(itemDesc);
     }
 
     @Override
