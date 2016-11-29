@@ -5,16 +5,18 @@ import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.mapper.CbItemDescMapper;
 import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.mapper.CbItemParamItemMapper;
-import com.convenientbuy.pojo.CbItem;
-import com.convenientbuy.pojo.CbItemDesc;
+import com.convenientbuy.pojo.*;
 import com.convenientbuy.rest.dao.JedisClient;
 import com.convenientbuy.rest.service.ItemService;
+import com.sun.org.apache.regexp.internal.RE;
+import com.sun.xml.internal.org.jvnet.staxex.Base64Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by bonismo@hotmail.com
@@ -106,6 +108,35 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Result getItemParam(long itemId) {
-        return null;
+        try {
+            String json = jedisClient.get(REDIS_ITEM_KEY + ":" + itemId + ":param");
+            if (!StringUtils.isBlank(json)) {
+                CbItemParamItem paramItem = JsonUtils.jsonToPOJO(json, CbItemParamItem.class);
+                return Result.ok(paramItem);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 创建查询条件
+        CbItemParamItemExample example = new CbItemParamItemExample();
+        CbItemParamItemExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(itemId);
+        // 查询商品规格参数
+        List<CbItemParamItem> list = itemParamItemMapper.selectByExampleWithBLOBs(example);
+        // 当不为 null, 且 size 大于 0 时
+        if (null != list && list.size() > 0) {
+            // 获取第一个
+            CbItemParamItem paramItem = list.get(0);
+            try {
+                // 写入缓存
+                jedisClient.set(REDIS_ITEM_KEY + ":" + itemId + ":param", JsonUtils.objectToJSON(paramItem));
+                // 设置有效期
+                jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":param", REDIS_ITEM_EXPIRE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return Result.ok(paramItem);
+        }
+        return Result.build(400, "无此商品规格");
     }
 }
