@@ -43,6 +43,7 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 根据商品 ID 获取基本信息
+     * 1.从缓存获取 2.缓存没有,从数据库获取 3.添加查询到的数据到缓存中
      *
      * @param itemId
      * @return
@@ -50,6 +51,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Result getItemBaseInfo(long itemId) {
         try {
+            // 1.缓存获取
             // 根据商品 ID 从缓存中获取商品信息
             String json = jedisClient.get(REDIS_ITEM_KEY + ":" + itemId + ":base");
             if (!StringUtils.isBlank(json)) {
@@ -59,7 +61,18 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        // 2.从数据库查询
+        CbItem item = itemMapper.selectByPrimaryKey(itemId);
+        // 3.从新添加至缓存
+        try {
+            // 需要将 item 转换为 json 数据
+            jedisClient.set(REDIS_ITEM_KEY + ":" + itemId + ":base", JsonUtils.objectToJSON(item));
+            // 从新设置缓存失效时间
+            jedisClient.expire(REDIS_ITEM_KEY + ":" + itemId + ":base", REDIS_ITEM_EXPIRE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok(item);
     }
 
     @Override
