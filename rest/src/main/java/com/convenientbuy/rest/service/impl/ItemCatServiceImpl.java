@@ -22,11 +22,16 @@ public class ItemCatServiceImpl implements ItemCatService {
     @Autowired
     private CbItemCatMapper mapper;
 
+    /**
+     * 查询商品分类列表 item.jsp 内 通过 lib-v1.js 调用回调函数
+     *
+     * @return
+     */
     @Override
     public CatResult getItemCatList() {
         CatResult catResult = new CatResult();
-        catResult.setData(get);
-        return null;
+        catResult.setData(getCatList(0));
+        return catResult;
     }
 
     /**
