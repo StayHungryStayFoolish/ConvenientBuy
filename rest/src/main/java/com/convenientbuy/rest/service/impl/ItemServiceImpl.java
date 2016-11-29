@@ -5,17 +5,17 @@ import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.mapper.CbItemDescMapper;
 import com.convenientbuy.mapper.CbItemMapper;
 import com.convenientbuy.mapper.CbItemParamItemMapper;
-import com.convenientbuy.pojo.*;
+import com.convenientbuy.pojo.CbItem;
+import com.convenientbuy.pojo.CbItemDesc;
+import com.convenientbuy.pojo.CbItemParamItem;
+import com.convenientbuy.pojo.CbItemParamItemExample;
 import com.convenientbuy.rest.dao.JedisClient;
 import com.convenientbuy.rest.service.ItemService;
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.xml.internal.org.jvnet.staxex.Base64Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.List;
 
 /**
@@ -106,6 +106,13 @@ public class ItemServiceImpl implements ItemService {
         return Result.ok(itemDesc);
     }
 
+    /**
+     * 根据商品 ID 获取规格参数
+     * 1.从缓存获取 2.缓存没有,从数据库获取 3.添加查询到的数据到缓存中,并设置失效时间
+     *
+     * @param itemId
+     * @return
+     */
     @Override
     public Result getItemParam(long itemId) {
         try {
