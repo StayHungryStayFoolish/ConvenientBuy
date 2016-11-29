@@ -25,7 +25,6 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private JedisClient jedisClient;
 
-    // Redis 商品内容 KRY
     @Value("${INDEX_CONTENT_REDIS_KEY}")
     private String INDEX_CONTENT_REDIS_KEY;
 
