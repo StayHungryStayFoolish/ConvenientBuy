@@ -30,7 +30,7 @@ public class ItemCatServiceImpl implements ItemCatService {
     }
 
     /**
-     * 查询商品分类列表
+     * 查询商品分类列表 item.jsp 内 通过 lib-v1.js 调用回调函数
      *
      * @param parentId
      * @return
@@ -47,7 +47,27 @@ public class ItemCatServiceImpl implements ItemCatService {
         //向list中添加节点
         int count = 0;
         for (CbItemCat cbItemCat : list) {
+            //判断是否为父节点
+            if (cbItemCat.getIsParent()) {
+                CatNode catNode = new CatNode();
+                if (parentId == 0) {
+                    catNode.setName("<a href='/products/" + cbItemCat.getId() + ".html'>" + cbItemCat.getName() + "</a>");
+                } else {
+                    catNode.setName(cbItemCat.getName());
+                }
+                catNode.setUrl("/products/" + cbItemCat.getId() + ".html");
+                catNode.setItem(getCatList(cbItemCat.getId()));
 
+                resultList.add(catNode);
+                count++;
+                //第一层只取14条记录
+                if (parentId == 0 && count >= 14) {
+                    break;
+                }
+                //如果是叶子节点
+            } else {
+                resultList.add("/products/" + cbItemCat.getId() + ".html|" + cbItemCat.getName());
+            }
         }
         return resultList;
     }
