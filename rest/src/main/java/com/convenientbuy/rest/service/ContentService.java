@@ -10,5 +10,10 @@ import java.util.List;
  */
 public interface ContentService {
 
+    /**
+     * 根据商品分类 ID 获取商品列表
+     * @param contentId
+     * @return
+     */
     List<CbContent> getContentList(long contentId);
 }

@@ -30,6 +30,7 @@ public class ContentServiceImpl implements ContentService {
     private String INDEX_CONTENT_REDIS_KEY;
 
     /**
+     * 根据商品分类 ID 查询
      * 1.需要查询缓存中是否有,2.如果没有从数据库获取,3.然后再让入 Redis 缓存中
      *
      * @param contentId
