@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * Created by bonismo@hotmail.com
  * 下午9:55 on 16/12/7.
+ * <p>
+ * 商品分类操作
  */
 @Controller
 public class ItemCatController {

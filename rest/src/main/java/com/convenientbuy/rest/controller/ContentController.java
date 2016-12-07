@@ -15,6 +15,8 @@ import java.util.List;
 /**
  * Created by bonismo@hotmail.com
  * 下午9:27 on 16/12/7.
+ * <p>
+ * 首页轮播图操作
  */
 @Controller
 @RequestMapping("/content")
