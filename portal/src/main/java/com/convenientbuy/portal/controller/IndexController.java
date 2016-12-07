@@ -22,7 +22,7 @@ public class IndexController {
     private ContentService service;
 
     /**
-     * 访问首页,展示内容
+     * 访问首页,展示轮播图内容
      *
      * @param model
      * @return
