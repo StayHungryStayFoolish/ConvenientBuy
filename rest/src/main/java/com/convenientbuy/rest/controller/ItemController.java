@@ -34,4 +34,16 @@ public class ItemController {
         return result;
     }
 
+    /**
+     * 根据商品 ID 获取描述信息
+     *
+     * @param itemId
+     * @return
+     */
+    @RequestMapping("/desc/{itemId}")
+    @ResponseBody
+    public Result getItemDesc(@PathVariable Long itemId) {
+        Result result = service.getItemDesc(itemId);
+        return result;
+    }
 }
