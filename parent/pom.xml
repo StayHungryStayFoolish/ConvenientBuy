@@ -12,6 +12,7 @@
         <module>../manager</module>
         <module>../portal</module>
         <module>../rest</module>
+        <module>../search</module>
     </modules>
     <packaging>pom</packaging>
 
