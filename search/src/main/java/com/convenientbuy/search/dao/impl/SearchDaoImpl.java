@@ -34,19 +34,19 @@ public class SearchDaoImpl implements SearchDao {
      */
     @Override
     public SearchResult search(SolrQuery query) throws Exception {
-        //返回值对象
+        // 创建对象
         SearchResult result = new SearchResult();
-        //根据查询条件查询索引库
+        // 根据查询条件查询索引库
         QueryResponse queryResponse = solrServer.query(query);
-        //取查询结果
+        // 获取查询结果
         SolrDocumentList solrDocumentList = queryResponse.getResults();
-        //取查询结果总数量
+        // 获取查询结果总数量
         result.setRecordCount(solrDocumentList.getNumFound());
-        //商品列表
+        // 创建商品列表
         List<Item> itemList = new ArrayList<>();
-        //取高亮显示
+        // 高亮显示
         Map<String, Map<String, List<String>>> highlighting = queryResponse.getHighlighting();
-        //取商品列表
+        // 商品列表
         for (SolrDocument solrDocument : solrDocumentList) {
             //创建一商品对象
             Item item = new Item();
