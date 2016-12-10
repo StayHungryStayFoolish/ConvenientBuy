@@ -26,6 +26,11 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private SolrServer solrServer;
 
+    /**
+     * 导入数据到 Solr 索引库
+     *
+     * @return
+     */
     @Override
     public Result importAllItems() {
         try {
