@@ -36,7 +36,7 @@
         <!-- 第二个*,类 -->
         <!-- 第三个*,方法 -->
         <!-- 第四个..,任意参数 -->
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.convenientbuy.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.convenientbuy.rest.service.*.*(..))" />
     </aop:config>
 </beans>
 
