@@ -1,6 +1,6 @@
 package com.convenientbuy.sso.dao.impl;
 
-import com.convenientbuy.rest.dao.JedisClient;
+import com.convenientbuy.sso.dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.JedisCluster;
 
