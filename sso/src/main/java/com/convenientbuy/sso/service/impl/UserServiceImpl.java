@@ -9,9 +9,11 @@ import com.convenientbuy.sso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +36,13 @@ public class UserServiceImpl implements UserService {
     @Value("${SSO_SESSION_EXPIRE}")
     private Integer SSO_SESSION_EXPIRE;
 
+    /**
+     * 根据内容进行用户信息校验
+     *
+     * @param content 1.username 2.phone 3.email
+     * @param type    1.2.3
+     * @return
+     */
     @Override
     public Result checkData(String content, Integer type) {
         // 创建查询条件
@@ -44,7 +53,7 @@ public class UserServiceImpl implements UserService {
         if (1 == type) {
             criteria.andUsernameEqualTo(content);
             //电话校验
-        } else if ( 2 == type) {
+        } else if (2 == type) {
             criteria.andPhoneEqualTo(content);
             //email校验
         } else {
@@ -58,9 +67,20 @@ public class UserServiceImpl implements UserService {
         return Result.ok(false);
     }
 
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
+     */
     @Override
     public Result createUser(CbUser user) {
-        return null;
+        user.setUpdated(new Date());
+        user.setCreated(new Date());
+        // Spring 框架 MD5 加密
+        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+        mapper.insert(user);
+        return Result.ok();
     }
 
     @Override
