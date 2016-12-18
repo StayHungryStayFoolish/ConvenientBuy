@@ -88,6 +88,9 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户登录
+     * 1.进行用户名校验,密码校验
+     * 2.校验正确,需要生成 token,存入 Redis 缓存
+     * 3.存入 Cookie ,并设置失效时间
      *
      * @param username
      * @param password
