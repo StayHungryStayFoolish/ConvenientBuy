@@ -8,6 +8,7 @@ import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.pojo.CbUserExample;
 import com.convenientbuy.sso.dao.JedisClient;
 import com.convenientbuy.sso.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -131,6 +132,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result getUserByToken(String token) {
-        return null;
+        String json = jedisClient.get(REDIS_USER_SESSION_KEY + ":" + token);
+        if (StringUtils.isBlank(json)) {
+            return Result.build(400, "用户登录已经过期,请重新登录");
+        }
+        // 重新设置失效时间
+        jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, SSO_SESSION_EXPIRE);
+        // 携带用户信息返回
+        return Result.ok(JsonUtils.jsonToPOJO(json, CbUser.class));
     }
 }
