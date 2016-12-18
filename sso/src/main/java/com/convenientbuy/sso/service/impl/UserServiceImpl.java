@@ -85,6 +85,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) {
+        CbUserExample example = new CbUserExample();
+        CbUserExample.Criteria criteria = example.createCriteria();
+        // 登录前判断
+        // 用户登录校验
+        criteria.andUsernameEqualTo(username);
+        List<CbUser> list = mapper.selectByExample(example);
+        if (null == list || list.size() == 0) {
+            return Result.build(400, "用户名或密码错误");
+        }
+        CbUser user = list.get(0);
+        // 密码校验
+        if (!DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.getPassword())) {
+            return Result.build(400, "用户名或密码错误");
+        }
         return null;
     }
 
