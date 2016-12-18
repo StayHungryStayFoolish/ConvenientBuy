@@ -39,6 +39,7 @@ public class SearchController {
         }
         SearchResult searchResult = null;
         try {
+            // 浏览器西欧编码,需要转 utf-8
             queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
             searchResult = service.search(queryString, page, rows);
         } catch (Exception e) {

@@ -30,7 +30,7 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public SearchResult search(String queryString, int page) {
-        // 防止查询参数
+        // 放置查询参数
         Map<String, String> param = new HashMap<>();
         param.put("q", queryString);
         param.put("page", String.valueOf(page));
