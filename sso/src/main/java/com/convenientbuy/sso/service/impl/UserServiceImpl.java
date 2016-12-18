@@ -130,6 +130,14 @@ public class UserServiceImpl implements UserService {
         return Result.ok(token);
     }
 
+    /**
+     * 根据 token , 获取用户信息
+     * 1.判断 token 的 session 是否过期
+     * 2.重新设置失效时间
+     *
+     * @param token
+     * @return
+     */
     @Override
     public Result getUserByToken(String token) {
         String json = jedisClient.get(REDIS_USER_SESSION_KEY + ":" + token);
