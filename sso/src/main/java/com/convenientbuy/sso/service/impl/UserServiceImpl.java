@@ -1,6 +1,8 @@
 package com.convenientbuy.sso.service.impl;
 
 import com.convenientbuy.common.pojo.Result;
+import com.convenientbuy.common.utils.CookieUtils;
+import com.convenientbuy.common.utils.JsonUtils;
 import com.convenientbuy.mapper.CbUserMapper;
 import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.pojo.CbUserExample;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by bonismo@hotmail.com
@@ -83,6 +86,15 @@ public class UserServiceImpl implements UserService {
         return Result.ok();
     }
 
+    /**
+     * 用户登录
+     *
+     * @param username
+     * @param password
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public Result userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) {
         CbUserExample example = new CbUserExample();
@@ -99,7 +111,19 @@ public class UserServiceImpl implements UserService {
         if (!DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.getPassword())) {
             return Result.build(400, "用户名或密码错误");
         }
-        return null;
+        // 使用 UUID 来生成 token
+        String token = UUID.randomUUID().toString();
+        // token 中不保存密码,安全性更高
+        user.setPassword(null);
+
+        // 用户信息写入 Redis
+        jedisClient.set(REDIS_USER_SESSION_KEY + ":" + token, JsonUtils.objectToJSON(user));
+        // 设置 Redis 有效期
+        jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, SSO_SESSION_EXPIRE);
+
+        CookieUtils.setCookie(request, response, "CON_TOKEN", token);
+        // 携带 token 返回
+        return Result.ok(token);
     }
 
     @Override
