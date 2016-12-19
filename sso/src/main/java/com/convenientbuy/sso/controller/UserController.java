@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by bonismo@hotmail.com
  * 下午9:47 on 16/12/19.
@@ -74,6 +77,27 @@ public class UserController {
     public Result createUser(CbUser user) {
         try {
             Result result = service.createUser(user);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.build(500, ExceptionUtil.getStackTrace(e));
+        }
+    }
+
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Result userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Result result = service.userLogin(username, password, request, response);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
