@@ -104,4 +104,25 @@ public class UserController {
             return Result.build(500, ExceptionUtil.getStackTrace(e));
         }
     }
+
+    @RequestMapping("/token/{token}")
+    @ResponseBody
+    public Object getUserByToken(@PathVariable String token, String callback) {
+        Result result = null;
+        try {
+            return  =service.getUserByToken(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = Result.build(500, ExceptionUtil.getStackTrace(e));
+        }
+
+        if (StringUtils.isBlank(callback)) {
+            return result;
+        } else {
+            // jsonp 跨域
+            MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
+            mappingJacksonValue.setJsonpFunction(callback);
+            return mappingJacksonValue;
+        }
+    }
 }
