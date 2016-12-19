@@ -2,6 +2,7 @@ package com.convenientbuy.sso.controller;
 
 import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.common.utils.ExceptionUtil;
+import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -61,5 +63,21 @@ public class UserController {
         }
     }
 
-
+    /**
+     * 用户注册
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    public Result createUser(CbUser user) {
+        try {
+            Result result = service.createUser(user);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.build(500, ExceptionUtil.getStackTrace(e));
+        }
+    }
 }
