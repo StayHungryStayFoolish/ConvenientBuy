@@ -105,12 +105,19 @@ public class UserController {
         }
     }
 
+    /**
+     * jsonp 跨域调用
+     *
+     * @param token
+     * @param callback
+     * @return
+     */
     @RequestMapping("/token/{token}")
     @ResponseBody
     public Object getUserByToken(@PathVariable String token, String callback) {
         Result result = null;
         try {
-            return  =service.getUserByToken(token);
+            result = service.getUserByToken(token);
         } catch (Exception e) {
             e.printStackTrace();
             result = Result.build(500, ExceptionUtil.getStackTrace(e));
