@@ -1,8 +1,10 @@
 package com.convenientbuy.sso.controller;
 
 import com.convenientbuy.common.pojo.Result;
+import com.convenientbuy.common.utils.ExceptionUtil;
 import com.convenientbuy.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.net.bsd.RExecClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,12 @@ public class UserController {
             } else {
                 return result;
             }
+        }
+        try {
+            result = service.checkData(param, type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = Result.build(500, ExceptionUtil.getStackTrace(e));
         }
         return null;
     }
