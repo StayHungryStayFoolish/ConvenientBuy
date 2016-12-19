@@ -4,7 +4,6 @@ import com.convenientbuy.common.pojo.Result;
 import com.convenientbuy.common.utils.ExceptionUtil;
 import com.convenientbuy.sso.service.UserService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.net.bsd.RExecClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,7 @@ public class UserController {
     @ResponseBody
     public Object checkData(@PathVariable String param, @PathVariable Integer type, String callback) {
         Result result = null;
-        //参数有效性校验
+        // 参数有效性校验
         if (StringUtils.isBlank(param)) {
             result = Result.build(400, "校验内容不能为空");
         }
@@ -37,7 +36,6 @@ public class UserController {
         if (type != 1 && type != 2 && type != 3) {
             result = Result.build(400, "校验内容类型错误");
         }
-        // 校验出错
         if (null != result) {
             if (null != callback) {
                 // jsonp 跨域请求
@@ -54,6 +52,14 @@ public class UserController {
             e.printStackTrace();
             result = Result.build(500, ExceptionUtil.getStackTrace(e));
         }
-        return null;
+        if (null != callback) {
+            MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
+            mappingJacksonValue.setJsonpFunction(callback);
+            return mappingJacksonValue;
+        } else {
+            return result;
+        }
     }
+
+
 }
