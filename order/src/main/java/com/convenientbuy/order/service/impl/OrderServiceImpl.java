@@ -9,9 +9,12 @@ import com.convenientbuy.order.service.OrderService;
 import com.convenientbuy.pojo.CbOrder;
 import com.convenientbuy.pojo.CbOrderItem;
 import com.convenientbuy.pojo.CbOrderShipping;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +36,45 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private JedisClient jedisClient;
 
+    // 点单号生成的 KEY
+    @Value("${ORDER_GEN_KEY}")
+    private String ORDER_GEN_KEY;
+    // 初始化的订单编号
+    @Value("${ORDER_INIT_ID}")
+    private String ORDER_INIT_ID;
+    // 订单明细 KEY
+    @Value("${ORDER_DETAIL_GEN_KEY}")
+    private String ORDER_DETAIL_GEN_KEY;
+
+    /**
+     * 创建订单
+     *
+     * @param order
+     * @param itemList
+     * @param orderShipping
+     * @return
+     */
     @Override
     public Result createOrder(CbOrder order, List<CbOrderItem> itemList, CbOrderShipping orderShipping) {
-        return null;
+        // 从 Redis 中获取订单号
+        String string = jedisClient.get(ORDER_GEN_KEY);
+        if (StringUtils.isBlank(string)) {
+            // 如果没有,设置值
+            jedisClient.set(ORDER_GEN_KEY, ORDER_INIT_ID);
+        }
+        long orderId = jedisClient.incr(ORDER_GEN_KEY);
+        // 1- 补全订单信息
+        order.setOrderId(String.valueOf(orderId));
+        // 状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
+        order.setStatus(1);
+        Date date = new Date();
+        order.setCreateTime(date);
+        order.setUpdateTime(date);
+        // 0:未评价 1:已评价
+        order.setBuyerRate(0);
+        // 向订单表插入数据
+        orderMapper.insert(order);
+
+
     }
 }
