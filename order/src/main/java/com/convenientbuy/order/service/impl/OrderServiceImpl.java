@@ -75,6 +75,23 @@ public class OrderServiceImpl implements OrderService {
         // 向订单表插入数据
         orderMapper.insert(order);
 
+// 2- 补全订单明细信息
+        for (CbOrderItem cbOrderItem : itemList) {
+            long orderDetailId = jedisClient.incr(ORDER_DETAIL_GEN_KEY);
+            cbOrderItem.setId(String.valueOf(orderDetailId));
+            cbOrderItem.setOrderId(String.valueOf(orderId));
+            // 添加到订单名字表中
+            orderItemMapper.insert(cbOrderItem);
+        }
 
+        // 3- 补全物流信息
+        orderShipping.setOrderId(String.valueOf(orderId));
+        orderShipping.setCreated(date);
+        orderShipping.setUpdated(date);
+        // 添加
+        shippingMapper.insert(orderShipping);
+
+        // 携带订单 ID 返回
+        return Result.ok(orderId);
     }
 }
