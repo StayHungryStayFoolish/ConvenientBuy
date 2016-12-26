@@ -48,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 创建订单
+     * 1.需要补全订单,特别是订单 ID 需从 Redis 的获取
+     * 2.需要补全订单明细信息
+     * 3.需要补全物流信息
      *
      * @param order
      * @param itemList
