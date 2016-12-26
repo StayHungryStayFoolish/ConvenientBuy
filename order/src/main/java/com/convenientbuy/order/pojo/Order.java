@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Order extends CbOrder {
 
-    // 订单
+    // 订单明细
     private List<CbOrderItem> orderItems;
 
     // 物流
