@@ -67,6 +67,9 @@
     mybatis generator 坑太多.
     建议使用 freemarker .
     
+####
     
+    年底了, GitHub 终于收了个尾.
+    明天开始新的 commit .....
     
     
