@@ -4,7 +4,6 @@ import com.convenientbuy.common.utils.CookieUtils;
 import com.convenientbuy.pojo.CbUser;
 import com.convenientbuy.portal.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
