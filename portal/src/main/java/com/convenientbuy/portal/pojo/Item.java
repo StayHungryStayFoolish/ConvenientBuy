@@ -3,6 +3,8 @@ package com.convenientbuy.portal.pojo;
 /**
  * Created by bonismo@hotmail.com
  * 下午6:43 on 16/11/8.
+ * <p>
+ * 商品信息
  */
 public class Item {
 
