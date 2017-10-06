@@ -75,4 +75,17 @@ public class Item {
     public void setItem_des(String item_des) {
         this.item_des = item_des;
     }
+
+    /**
+     * Solr 搜索关键词时,获取 Json 数据 ,如果图片是多张,在 image 的 url 中,会出现多个 url 存在一个 String ,无法显示
+     *
+     * @return
+     */
+    public String[] getImages() {
+        if (image != null) {
+            String[] images = image.split(",");
+            return images;
+        }
+        return null;
+    }
 }
