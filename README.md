@@ -71,5 +71,83 @@
     
     年底了, GitHub 终于收了个尾.
     明天开始新的 commit .....
+
+
+### 补充: IDEA 解决 Invalid bound statement (not found) 办法
+
+    看到了两篇文章,测试了效果不错,做下笔记.
     
+    问题原因: xml 没有在 resources 文件下.
     
+    打脸方法: 移动到 resources 文件夹内,在 sqlSessionFactory 内,配置扫描路径
+    <!-- 自动扫描mapping.xml文件 -->
+    		<property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+    
+    解决前提: xml 不存在 resources 文件夹内
+    方法1: maven 中添加过滤
+    
+    <!--配置Maven 对resource文件 过滤 -->
+            <resources>
+                <resource>
+                    <directory>src/main/resources</directory>
+                    <includes>
+                        <include>**/*.properties</include>
+                        <include>**/*.xml</include>
+                    </includes>
+                    <filtering>true</filtering>
+                </resource>
+                <resource>
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.properties</include>
+                        <include>**/*.xml</include>
+                    </includes>
+                    <filtering>true</filtering>
+                </resource>
+            </resources>
+            
+    方法2: sqlMap.xml（mybatis-config.xml）中配置mapper自动注册扫描包
+         <mappers>
+                 <mapper resource="sqlmap/User.xml"/>
+                 <!--通过resource方法一次加载一个映射文件 -->
+                  <!--<mapper resource="sqlmap/UserMapper.xml"/>-->
+         
+                 <!-- 通过mapper接口加载单个 映射文件
+                 遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中
+                 上边规范的前提是：使用的是mapper代理方法
+                  -->
+                  <!--<mapper class="cn.itcast.mybatis.mapper.UserMapper"/>-->
+         
+                 <!-- 批量加载mapper
+                 指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载
+                 遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 中
+                 上边规范的前提是：使用的是mapper代理方法
+                  -->
+                 <package name="cn.itcast.mybatis.mapper"/>
+         
+             </mappers>
+
+    方法3:父类项目 pom.xml 文件中
+    <build>
+        <!--这里进行配置，后会自动的加载mapper.xml文件　:配置Maven 对resource文件 过滤 -->
+        <resources>
+          <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+              <include>**/*.properties</include>
+              <include>**/*.xml</include>
+            </includes>
+            <filtering>true</filtering>
+          </resource>
+          <resource>
+            <directory>src/main/java</directory>
+            <includes>
+              <include>**/*.properties</include>
+              <include>**/*.xml</include>
+            </includes>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+      </build>
+      
+      
