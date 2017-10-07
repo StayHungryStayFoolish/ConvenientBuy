@@ -75,6 +75,11 @@
 
 ### 补充: IDEA 解决 Invalid bound statement (not found) 办法
 
+    三个地方找原因:
+    1.配置文件是否正确
+    2.xml文件是否添加了过滤
+    3.或许 xml 生成的文件不对
+
     看到了两篇文章,测试了效果不错,做下笔记.
     
     问题原因: xml 没有在 resources 文件下.
@@ -94,7 +99,7 @@
                         <include>**/*.properties</include>
                         <include>**/*.xml</include>
                     </includes>
-                    <filtering>true</filtering>
+                    <filtering>false</filtering>
                 </resource>
                 <resource>
                     <directory>src/main/java</directory>
@@ -102,7 +107,7 @@
                         <include>**/*.properties</include>
                         <include>**/*.xml</include>
                     </includes>
-                    <filtering>true</filtering>
+                    <filtering>false</filtering>
                 </resource>
             </resources>
             
@@ -150,4 +155,69 @@
         </resources>
       </build>
       
+    插件模式 ----------
       
+    方法4:利用build-helper-maven-plugin插件  
+    <build>
+        <plugins>
+        <!--  
+            此plugin可以用  
+            利用此plugin，把源代码中的xml文件，  
+            打包到相应位置，这里主要是为了打包Mybatis的mapper.xml文件   
+            -->  
+            <plugin>  
+                <groupId>org.codehaus.mojo</groupId>  
+                <artifactId>build-helper-maven-plugin</artifactId>  
+                <version>1.8</version>  
+                <executions>  
+                    <execution>  
+                        <id>add-resource</id>  
+                        <phase>generate-resources</phase>  
+                        <goals>  
+                            <goal>add-resource</goal>  
+                        </goals>  
+                        <configuration>  
+                            <resources>  
+                                <resource>  
+                                    <directory>src/main/java</directory>  
+                                    <includes>  
+                                        <include>**/*.xml</include>  
+                                    </includes>  
+                                </resource>  
+                            </resources>  
+                        </configuration>  
+                    </execution>  
+                </executions>  
+            </plugin> 
+        </plugins>
+    </build>    
+    
+    方法5:利用maven-resources-plugin插件
+    <build>
+        <plugins>
+            <plugin>  
+                <artifactId>maven-resources-plugin</artifactId>  
+                <version>2.5</version>  
+                <executions>  
+                    <execution>  
+                        <id>copy-xmls</id>  
+                        <phase>process-sources</phase>  
+                        <goals>  
+                            <goal>copy-resources</goal>  
+                        </goals>  
+                        <configuration>  
+                            <outputDirectory>${basedir}/target/classes</outputDirectory>  
+                            <resources>  
+                                <resource>  
+                                    <directory>${basedir}/src/main/java</directory>  
+                                    <includes>  
+                                        <include>**/*.xml</include>  
+                                    </includes>  
+                                </resource>  
+                            </resources>  
+                        </configuration>  
+                    </execution>  
+                </executions>  
+            </plugin> 
+        </plugins>
+    </build>
